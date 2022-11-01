@@ -1,14 +1,57 @@
 import { Linking, StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, StatusBar, Dimensions, SafeAreaView, TextInput, Button } from 'react-native';
 import React, { Component } from "react"
 import { RadioButton, Divider, Checkbox } from 'react-native-paper';
-
-
+import QRCode from 'react-native-qrcode-svg';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 const width_proportion = Dimensions.get('window').width;
 
 export default class ScoutingSheet extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
+            teamNumber: '',
+            matchNumber: '',
+            color: '',
+            crossTarmac: 0,
+            climbAttempted: 0,
+            primaryScoringLocation: '',
+            climbLevel: '0',
+            stopForMoreThan10Secs: 0,
+            secsStopped: '0',
+            RSLStatus: '',
+            Notes: '',
+            GenerateQrCode: false,
+
+            AutonuppHubAtt: 0,
+            AutonuppHubComp: 0,
+            AutonlowerHubAtt: 0,
+            AutonlowerHubComp: 0,
+
+            TeleopuppHubAtt: 0,
+            TeleopuppHubComp: 0,
+            TeleoplowerHubAtt: 0,
+            TeleoplowerHubComp: 0,
+
+            currQRCode: JSON.stringify()
+
+        }
+    }
+
+
+    QRCODE = ({ value }) => {
+        return (
+            <QRCode
+                value={value}
+                size={250}
+                color="black"
+                backgroundColor="white"
+            />
+        )
+    }
+
+    RESET = function () {
+        this.setState({
 
             teamNumber: '',
             matchNumber: '',
@@ -30,9 +73,9 @@ export default class ScoutingSheet extends Component {
             TeleopuppHubAtt: 0,
             TeleopuppHubComp: 0,
             TeleoplowerHubAtt: 0,
-            TeleoplowerHubComp: 0
+            TeleoplowerHubComp: 0,
 
-        }
+        })
     }
 
     containerStyle = function (options) {
@@ -78,9 +121,9 @@ export default class ScoutingSheet extends Component {
                                 <Text style={{ fontSize: 22 }}>Team Color:</Text>
                                 <View style={styles.TeamColor}>
                                     <RadioButton.Android
-                                        value="Red"
-                                        status={this.state.color === 'Red' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ color: 'Red' })}
+                                        value="R"
+                                        status={this.state.color === 'R' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ color: 'R' })}
                                         color='red'
                                     />
                                     <Text style={{ fontSize: 20, color: 'red' }} >Red</Text>
@@ -88,9 +131,9 @@ export default class ScoutingSheet extends Component {
 
                                 <View style={styles.TeamColor}>
                                     <RadioButton.Android
-                                        value="Blue"
-                                        status={this.state.color === 'Blue' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ color: 'Blue' })}
+                                        value="B"
+                                        status={this.state.color === 'B' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ color: 'B' })}
                                         color='blue'
                                     />
                                     <Text style={{ fontSize: 20, color: 'blue' }}>Blue</Text>
@@ -115,7 +158,7 @@ export default class ScoutingSheet extends Component {
 
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginTop: 7 }}>
 
-                                <View style={{ justifyContent: 'flex-end' }}>
+                                <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
                                     <Text style={{ fontSize: 20 }}>Upper Attempted</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                         <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonuppHubAtt: Math.max(0, this.state.AutonuppHubAtt - 1) }) }}>
@@ -143,7 +186,7 @@ export default class ScoutingSheet extends Component {
                             </View>
 
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginTop: 7 }}>
-                                <View style={{ justifyContent: 'flex-end' }}>
+                                <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
                                     <Text style={{ fontSize: 20 }}>Lower Attempted</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                         <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonlowerHubAtt: Math.max(this.state.AutonlowerHubAtt - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
@@ -171,7 +214,7 @@ export default class ScoutingSheet extends Component {
 
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginTop: 7 }}>
 
-                                <View style={{ justifyContent: 'flex-end' }}>
+                                <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
                                     <Text style={{ fontSize: 20 }}>Upper Attempted</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                         <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopuppHubAtt: Math.max(0, this.state.TeleopuppHubAtt - 1) }) }}>
@@ -199,7 +242,7 @@ export default class ScoutingSheet extends Component {
                             </View>
 
                             <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginTop: 7 }}>
-                                <View style={{ justifyContent: 'flex-end' }}>
+                                <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
                                     <Text style={{ fontSize: 20 }}>Lower Attempted</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                         <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleoplowerHubAtt: Math.max(0, this.state.TeleoplowerHubAtt - 1) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
@@ -258,8 +301,8 @@ export default class ScoutingSheet extends Component {
                                         <View style={styles.TeamClimb}>
                                             <RadioButton.Android
                                                 value="1"
-                                                status={this.state.climbLevel === '1' ? 'checked' : 'unchecked'}
-                                                onPress={() => this.setState({ climbLevel: '1' })}
+                                                status={this.state.climbLevel === '4' ? 'checked' : 'unchecked'}
+                                                onPress={() => this.setState({ climbLevel: '4' })}
                                             />
                                             <Text style={{ fontSize: 20 }} >1</Text>
                                         </View>
@@ -267,24 +310,24 @@ export default class ScoutingSheet extends Component {
                                         <View style={styles.TeamClimb}>
                                             <RadioButton.Android
                                                 value="2"
-                                                status={this.state.climbLevel === '2' ? 'checked' : 'unchecked'}
-                                                onPress={() => this.setState({ climbLevel: '2' })}
+                                                status={this.state.climbLevel === '6' ? 'checked' : 'unchecked'}
+                                                onPress={() => this.setState({ climbLevel: '6' })}
                                             />
                                             <Text style={{ fontSize: 20 }}>2</Text>
                                         </View>
                                         <View style={styles.TeamClimb}>
                                             <RadioButton.Android
                                                 value="3"
-                                                status={this.state.climbLevel === '3' ? 'checked' : 'unchecked'}
-                                                onPress={() => this.setState({ climbLevel: '3' })}
+                                                status={this.state.climbLevel === '10' ? 'checked' : 'unchecked'}
+                                                onPress={() => this.setState({ climbLevel: '10' })}
                                             />
                                             <Text style={{ fontSize: 20 }}>3</Text>
                                         </View>
                                         <View style={styles.TeamClimb}>
                                             <RadioButton.Android
                                                 value="2"
-                                                status={this.state.climbLevel === 'T' ? 'checked' : 'unchecked'}
-                                                onPress={() => this.setState({ climbLevel: 'T' })}
+                                                status={this.state.climbLevel === '15' ? 'checked' : 'unchecked'}
+                                                onPress={() => this.setState({ climbLevel: '15' })}
                                             />
                                             <Text style={{ fontSize: 20 }}>T</Text>
                                         </View>
@@ -357,9 +400,50 @@ export default class ScoutingSheet extends Component {
                                 >
                                 </TextInput>
                             </View>
-                            <TouchableOpacity style={styles.Submit}>
+                            <TouchableOpacity style={styles.Submit}
+                                onPress={() => {
+                                    this.setState({
+
+                                        currQRCode: JSON.stringify({
+
+                                            teamNumber: this.state.teamNumber,
+                                            matchNumber: this.state.matchNumber,
+                                            color: this.state.color,
+                                            crossTarmac: this.state.crossTarmac,
+                                            climbAttempted: this.state.climbAttempted,
+                                            primaryScoringLocation: this.state.primaryScoringLocation,
+                                            climbLevel: this.state.climbLevel,
+                                            stopForMoreThan10Secs: this.state.stopForMoreThan10Secs,
+                                            secsStopped: this.state.secsStopped,
+                                            RSLStatus: this.state.RSLStatus,
+                                            Notes: this.state.Notes,
+
+                                            AutonuppHubAtt: this.state.AutonuppHubAtt,
+                                            AutonuppHubComp: this.state.AutonuppHubComp,
+                                            AutonlowerHubAtt: this.state.AutonlowerHubAtt,
+                                            AutonlowerHubComp: this.state.AutonlowerHubComp,
+
+                                            TeleopuppHubAtt: this.state.TeleopuppHubAtt,
+                                            TeleopuppHubComp: this.state.TeleopuppHubComp,
+                                            TeleoplowerHubAtt: this.state.TeleoplowerHubAtt,
+                                            TeleoplowerHubComp: this.state.TeleoplowerHubComp
+
+
+                                        }),
+                                        GenerateQrCode: true
+
+                                    })
+                                    this.RESET()
+                                }}>
                                 <Text style={{ fontSize: 22 }}>SUBMIT</Text>
                             </TouchableOpacity>
+                            {this.state.GenerateQrCode &&
+                                <View style={{ alignSelf: 'center', marginTop: 15 }}>
+                                    <this.QRCODE
+                                        value={this.state.currQRCode}
+                                    />
+                                </View>
+                            }
                         </View>
                     </ScrollView>
                 </View>
