@@ -34,7 +34,7 @@ export default class ScoutingSheet extends Component {
             TeleoplowerHubAtt: 0,
             TeleoplowerHubComp: 0,
 
-            currQRCode: JSON.stringify()
+            currQRCode: JSON.stringify({ h: 3 })
 
         }
     }
@@ -97,9 +97,8 @@ export default class ScoutingSheet extends Component {
                 </View>
                 <View style={styles.MainContent}>
                     <ScrollView>
-
                         <ScrollView horizontal={true}>
-                            <View style={{ flexDirection: 'column' }}>
+                            <View style={{ flexDirection: 'column', width: width_proportion * 0.95 }}>
 
                                 <Text style={{ fontSize: 22 }}>Team #</Text>
                                 <View style={styles.InputView}>
@@ -150,20 +149,22 @@ export default class ScoutingSheet extends Component {
 
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Auton</Text>
                                 <Divider style={{ marginTop: 5 }} />
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={styles.ArgText}>Cross Tarmac</Text>
-                                    <View style={{ marginTop: 6, marginLeft: 5 }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={styles.CheckboxText}>Cross Tarmac</Text>
+                                    <View style={{ marginLeft: 5 }}>
                                         <Checkbox.Android
                                             status={this.state.crossTarmac == 1 ? 'checked' : 'unchecked'}
                                             onPress={() => this.state.crossTarmac == 1 ? this.setState({ crossTarmac: 0 }) : this.setState({ crossTarmac: 1 })}
+
                                         />
                                     </View>
+
                                 </View>
 
-                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginTop: 7 }}>
+                                <View style={styles.CounterView}>
 
-                                    <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 20 }}>Upper Attempted</Text>
+                                    <View style={{ justifyContent: 'flex-end' }}>
+                                        <Text style={{ fontSize: 18 }}>Upper Attempted</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonuppHubAtt: Math.max(0, this.state.AutonuppHubAtt - 1) }) }}>
                                                 <Text style={styles.ArgText}>-</Text>
@@ -175,8 +176,8 @@ export default class ScoutingSheet extends Component {
                                         </View>
                                     </View>
 
-                                    <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 20 }}>Upper Completed</Text>
+                                    <View style={{ justifyContent: 'flex-end' }}>
+                                        <Text style={{ fontSize: 18 }}>Upper Completed</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonuppHubComp: Math.max(0, this.state.AutonuppHubComp - 1) }) }}>
                                                 <Text style={styles.ArgText}>-</Text>
@@ -189,9 +190,9 @@ export default class ScoutingSheet extends Component {
                                     </View>
                                 </View>
 
-                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginTop: 7 }}>
-                                    <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 20 }}>Lower Attempted</Text>
+                                <View style={styles.CounterView}>
+                                    <View style={{ justifyContent: 'flex-end' }}>
+                                        <Text style={{ fontSize: 18 }}>Lower Attempted</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonlowerHubAtt: Math.max(this.state.AutonlowerHubAtt - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
                                             <Text style={styles.ArgText}>{this.state.AutonlowerHubAtt}</Text>
@@ -199,8 +200,8 @@ export default class ScoutingSheet extends Component {
                                         </View>
                                     </View>
 
-                                    <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 20 }}>Lower Completed</Text>
+                                    <View style={{ justifyContent: 'flex-end' }}>
+                                        <Text style={{ fontSize: 18 }}>Lower Completed</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonlowerHubComp: Math.max(this.state.AutonlowerHubComp - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
                                             <Text style={styles.ArgText}>{this.state.AutonlowerHubComp}</Text>
@@ -216,10 +217,10 @@ export default class ScoutingSheet extends Component {
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Teleop</Text>
                                 <Divider style={{ marginTop: 5 }} />
 
-                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginTop: 7 }}>
+                                <View style={styles.CounterView}>
 
-                                    <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 20 }}>Upper Attempted</Text>
+                                    <View style={{ justifyContent: 'flex-end' }}>
+                                        <Text style={{ fontSize: 18 }}>Upper Attempted</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopuppHubAtt: Math.max(0, this.state.TeleopuppHubAtt - 1) }) }}>
                                                 <Text style={styles.ArgText}>-</Text>
@@ -231,8 +232,8 @@ export default class ScoutingSheet extends Component {
                                         </View>
                                     </View>
 
-                                    <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 20 }}>Upper Completed</Text>
+                                    <View style={{ justifyContent: 'flex-end' }}>
+                                        <Text style={{ fontSize: 18 }}>Upper Completed</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopuppHubComp: Math.max(0, this.state.TeleopuppHubComp - 1) }) }}>
                                                 <Text style={styles.ArgText}>-</Text>
@@ -245,9 +246,9 @@ export default class ScoutingSheet extends Component {
                                     </View>
                                 </View>
 
-                                <View style={{ flexDirection: 'row', justifyContent: 'flex-start', marginTop: 7 }}>
-                                    <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 20 }}>Lower Attempted</Text>
+                                <View style={styles.CounterView}>
+                                    <View style={{ justifyContent: 'flex-end' }}>
+                                        <Text style={{ fontSize: 18 }}>Lower Attempted</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleoplowerHubAtt: Math.max(0, this.state.TeleoplowerHubAtt - 1) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
                                             <Text style={styles.ArgText}>{this.state.TeleoplowerHubAtt}</Text>
@@ -255,8 +256,8 @@ export default class ScoutingSheet extends Component {
                                         </View>
                                     </View>
 
-                                    <View style={{ justifyContent: 'flex-end', marginLeft: 20 }}>
-                                        <Text style={{ fontSize: 20 }}>Lower Completed</Text>
+                                    <View style={{ justifyContent: 'flex-end' }}>
+                                        <Text style={{ fontSize: 18 }}>Lower Completed</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleoplowerHubComp: Math.max(0, this.state.TeleoplowerHubComp - 1) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
                                             <Text style={styles.ArgText}>{this.state.TeleoplowerHubComp}</Text>
@@ -281,9 +282,9 @@ export default class ScoutingSheet extends Component {
 
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Endgame</Text>
                                 <Divider style={{ marginTop: 5 }} />
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={styles.ArgText}>Attempted Climb</Text>
-                                    <View style={{ marginTop: 6, marginLeft: 5 }}>
+                                <View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center' }}>
+                                    <Text style={styles.CheckboxText}>Attempted Climb</Text>
+                                    <View style={{ marginLeft: 5 }}>
                                         <Checkbox.Android
                                             status={this.state.climbAttempted == 1 ? 'checked' : 'unchecked'}
                                             onPress={() => this.state.climbAttempted == 1 ? this.setState({ climbAttempted: 0, climbLevel: '0' }) : this.setState({ climbAttempted: 1 })}
@@ -338,8 +339,8 @@ export default class ScoutingSheet extends Component {
                                         </View>
                                     </View>
                                 }
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ maxWidth: width_proportion * 0.6, fontSize: 18, marginTop: 5 }}>Did the Robot Stop moving for more than 10 secs?</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+                                    <Text style={{ maxWidth: width_proportion * 0.7, fontSize: 18 }}>Did the Robot Stop moving for more than 10 secs?</Text>
                                     <View style={{ marginLeft: 4 }}>
                                         <Checkbox.Android
                                             status={this.state.stopForMoreThan10Secs == 1 ? 'checked' : 'unchecked'}
@@ -459,6 +460,14 @@ export default class ScoutingSheet extends Component {
 }
 
 const styles = StyleSheet.create({
+    InnerCounterView: {
+        justifyContent: 'flex-end'
+    },
+    CounterView: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: 7
+    },
     Submit: {
         alignSelf: 'center',
         marginTop: 10,
@@ -472,6 +481,9 @@ const styles = StyleSheet.create({
     ArgText: {
         fontSize: 22,
         marginTop: 10,
+    },
+    CheckboxText: {
+        fontSize: 20
     },
     TeamColor: {
         marginLeft: 10,
