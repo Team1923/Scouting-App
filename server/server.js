@@ -20,13 +20,14 @@ app.post("/", async (req, res) => {
     await googleSheets.spreadsheets.values.append({
         auth: auth,
         spreadsheetId: spreadSheetId,
-        range: "Match Data!A:S",
+        range: "Match Data!A:B",
         valueInputOption: "USER_ENTERED",
         resource: {
             values: data
         },
     })
+    res.end()
 })
 
 
-app.listen(3000, () => { console.log("Listening on 4000") })
+app.listen(3000, () => { console.log("Listening on 3000") })

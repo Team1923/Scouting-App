@@ -95,13 +95,12 @@ export default class QRCodeScanner extends Component {
             body: JSON.stringify(this.state.tableBody),
         };
         this.setState({ Sheetloading: true })
-        await fetch("https://6548-96-235-182-224.ngrok.io/", options)
+        await fetch("https://fdd0-96-235-182-224.ngrok.io", options)
             .then((response) => {
-                this.setState({ ResponseText: "Successfully Sent" })
+                this.setState({ ResponseText: "Successfully Sent", Sheetloading: false })
             }).catch((err) => {
                 this.setState({ ResponseText: "An Error Occurred: " + err })
             })
-        this.setState({ Sheetloading: false })
         this.storeData([]).then(() => { this.updateItems() })
     }
 
