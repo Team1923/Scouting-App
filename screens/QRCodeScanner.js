@@ -95,7 +95,7 @@ export default class QRCodeScanner extends Component {
             body: JSON.stringify(this.state.tableBody),
         };
         this.setState({ Sheetloading: true })
-        await fetch("http://192.168.86.35:4000/sheets", options)
+        await fetch("https://6548-96-235-182-224.ngrok.io/", options)
             .then((response) => {
                 this.setState({ ResponseText: "Successfully Sent" })
             }).catch((err) => {

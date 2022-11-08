@@ -4,9 +4,9 @@ const app = express();
 app.use(express.static("public"));
 app.use(express.json({ limit: '1mb' }))
 
-app.get("/sheets", async (req, res) => {
+app.post("/", async (req, res) => {
 
-    /*const data = req.body
+    const data = req.body
     const auth = new google.auth.GoogleAuth({
         keyFile: "credentials.json",
         scopes: "https://www.googleapis.com/auth/spreadsheets"
@@ -20,14 +20,13 @@ app.get("/sheets", async (req, res) => {
     await googleSheets.spreadsheets.values.append({
         auth: auth,
         spreadsheetId: spreadSheetId,
-        range: "Match Data!A:S",
+        range: "Match Data!A:B",
         valueInputOption: "USER_ENTERED",
         resource: {
             values: data
         },
-    })*/
-    res.send("wwyyyd")
+    })
 })
 
 
-app.listen(4000, () => { console.log("Listening on 4000") })
+app.listen(3000, () => { console.log("Listening on 4000") })
