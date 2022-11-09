@@ -95,7 +95,7 @@ export default class QRCodeScanner extends Component {
             body: JSON.stringify(this.state.tableBody),
         };
         this.setState({ Sheetloading: true })
-        await fetch("https://fdd0-96-235-182-224.ngrok.io", options)
+        await fetch("https://fathomless-basin-63309.herokuapp.com/sheets", options)
             .then((response) => {
                 this.setState({ ResponseText: "Successfully Sent", Sheetloading: false })
             }).catch((err) => {
@@ -142,7 +142,7 @@ export default class QRCodeScanner extends Component {
                             this.state.Sheetloading == true ?
                                 <ActivityIndicator size="large" color="black" />
                                 :
-                                <Text>{this.state.ResponseText}</Text>
+                                <Text style={{ alignSelf: 'center', marginTop: 5, fontSize: 20 }}>{this.state.ResponseText}</Text>
                         }
                     </ScrollView>
 
