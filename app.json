@@ -8,6 +8,9 @@
     ],
     "android": {
       "package": "com.turtlez200.RoboticsScoutingApp"
+    },
+    "ios": {
+      "bundleIdentifier": "com.turtlez200.RoboticsScoutingApp"
     }
   }
 }
