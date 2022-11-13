@@ -56,7 +56,7 @@ export default class QRCodeScanner extends Component {
             scanned: true,
         })
 
-        n = JSON.parse(scan)
+        var n = JSON.parse(scan)
         this.storeData(
             [...this.state.tableBody,
             [n.teamNumber, n.matchNumber, n.color, n.crossTarmac,
@@ -98,10 +98,10 @@ export default class QRCodeScanner extends Component {
         await fetch("https://fathomless-basin-63309.herokuapp.com/sheets", options)
             .then((response) => {
                 this.setState({ ResponseText: "Successfully Sent", Sheetloading: false })
+                this.storeData([]).then(() => { this.updateItems() })
             }).catch((err) => {
                 this.setState({ ResponseText: "An Error Occurred: " + err })
             })
-        this.storeData([]).then(() => { this.updateItems() })
     }
 
     render() {
@@ -109,8 +109,7 @@ export default class QRCodeScanner extends Component {
 
             <SafeAreaView style={this.containerStyle()}>
                 <View style={styles.TopBottomBanner}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate("ScoutingSheet")}><AntDesign name='arrowleft' size={30} /></TouchableOpacity>
-                    <Text style={styles.Title}>MidKnight Inventors Scouting App</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate("ScoutingSheet")}><Text style={styles.Title}>MidKnight Inventors Scouting App</Text></TouchableOpacity>
                 </View>
                 <View style={{ flex: 0.95, justifyContent: 'flex-start', marginTop: 20 }}>
                     <ScrollView style={{}}>
@@ -124,7 +123,7 @@ export default class QRCodeScanner extends Component {
                             <View style={styles.BarCodeBox}>
                                 <BarCodeScanner
                                     onBarCodeScanned={(scan) => this.state.scanned ? undefined : this.SaveData(scan.data)}
-                                    style={{ height: 400, width: width_proportion * 0.9, borderRadius: 10 }}
+                                    style={{ height: height_proportion * 0.6, width: width_proportion * 0.9 }}
                                 />
                                 {this.state.scanned && <Button title='Scan Again' onPress={() => this.setState({ scanned: false })} />}
                             </View>
@@ -157,9 +156,9 @@ export default class QRCodeScanner extends Component {
 const styles = StyleSheet.create({
     BarCodeBox: {
         alignItems: 'center',
-        justifyContent: 'center',
         alignSelf: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+
 
     },
     TopBottomBanner: {

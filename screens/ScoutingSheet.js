@@ -1,11 +1,12 @@
-import { Linking, StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, StatusBar, Dimensions, SafeAreaView, TextInput, Button } from 'react-native';
+import { Linking, StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, StatusBar, Dimensions, SafeAreaView, TextInput, Button, Alert } from 'react-native';
 import React, { Component } from "react"
 import { RadioButton, Divider, Checkbox } from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 import { AntDesign } from '@expo/vector-icons';
 
 const width_proportion = Dimensions.get('window').width;
-
+const height_proportion = Dimensions.get('window').height;
+const font = Dimensions.get('window').fontScale
 export default class ScoutingSheet extends Component {
     constructor(props) {
         super(props);
@@ -38,6 +39,19 @@ export default class ScoutingSheet extends Component {
 
         }
     }
+
+    createTwoButtonAlert = () =>
+        Alert.alert(
+            "Start New Match?",
+            "This will clear everything in the form",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                { text: "OK", onPress: () => this.RESET() }
+            ]
+        );
 
 
     QRCODE = ({ value }) => {
@@ -75,6 +89,7 @@ export default class ScoutingSheet extends Component {
             TeleopuppHubComp: 0,
             TeleoplowerHubAtt: 0,
             TeleoplowerHubComp: 0,
+            GenerateQrCode: false
 
         })
     }
@@ -92,13 +107,17 @@ export default class ScoutingSheet extends Component {
         return (
             <SafeAreaView style={this.containerStyle()}>
                 <View style={styles.TopBottomBanner}>
-                    <Text style={styles.Title}>MidKnight Inventors Scouting App</Text>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate("QrCodeScanner")}><AntDesign name='qrcode' size={30} /></TouchableOpacity>
+                    <View style={{ flex: 0.9, justifyContent: 'center', flexDirection: 'row' }}>
+                        <Text style={styles.Title}>MidKnight Inventors Scouting App</Text>
+                    </View>
+                    <View style={{ flex: 0.1, justifyContent: 'flex-end', flexDirection: 'row' }}>
+                        <TouchableOpacity style={{ marginRight: 10 }} onPress={() => this.props.navigation.navigate("QrCodeScanner")}><AntDesign name='qrcode' size={height_proportion * 0.04} /></TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.MainContent}>
                     <ScrollView>
                         <ScrollView horizontal={true}>
-                            <View style={{ flexDirection: 'column', width: width_proportion * 0.95 }}>
+                            <View style={{ flexDirection: 'column', width: width_proportion * 0.95, marginLeft: 20, marginTop: 10 }}>
 
                                 <Text style={{ fontSize: 22 }}>Team #</Text>
                                 <View style={styles.InputView}>
@@ -405,49 +424,57 @@ export default class ScoutingSheet extends Component {
                                     >
                                     </TextInput>
                                 </View>
-                                <TouchableOpacity style={styles.Submit}
-                                    onPress={() => {
-                                        this.setState({
+                                <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'center' }}>
+                                    <TouchableOpacity
+                                        style={styles.Submit}
+                                        onPress={() => {
+                                            this.setState({
 
-                                            currQRCode: JSON.stringify({
+                                                currQRCode: JSON.stringify({
 
-                                                teamNumber: this.state.teamNumber,
-                                                matchNumber: this.state.matchNumber,
-                                                color: this.state.color,
-                                                crossTarmac: this.state.crossTarmac,
-                                                climbAttempted: this.state.climbAttempted,
-                                                primaryScoringLocation: this.state.primaryScoringLocation,
-                                                climbLevel: this.state.climbLevel,
-                                                stopForMoreThan10Secs: this.state.stopForMoreThan10Secs,
-                                                secsStopped: this.state.secsStopped,
-                                                RSLStatus: this.state.RSLStatus,
-                                                Notes: this.state.Notes,
+                                                    teamNumber: this.state.teamNumber,
+                                                    matchNumber: this.state.matchNumber,
+                                                    color: this.state.color,
+                                                    crossTarmac: this.state.crossTarmac,
+                                                    climbAttempted: this.state.climbAttempted,
+                                                    primaryScoringLocation: this.state.primaryScoringLocation,
+                                                    climbLevel: this.state.climbLevel,
+                                                    stopForMoreThan10Secs: this.state.stopForMoreThan10Secs,
+                                                    secsStopped: this.state.secsStopped,
+                                                    RSLStatus: this.state.RSLStatus,
+                                                    Notes: this.state.Notes,
 
-                                                AutonuppHubAtt: this.state.AutonuppHubAtt,
-                                                AutonuppHubComp: this.state.AutonuppHubComp,
-                                                AutonlowerHubAtt: this.state.AutonlowerHubAtt,
-                                                AutonlowerHubComp: this.state.AutonlowerHubComp,
+                                                    AutonuppHubAtt: this.state.AutonuppHubAtt,
+                                                    AutonuppHubComp: this.state.AutonuppHubComp,
+                                                    AutonlowerHubAtt: this.state.AutonlowerHubAtt,
+                                                    AutonlowerHubComp: this.state.AutonlowerHubComp,
 
-                                                TeleopuppHubAtt: this.state.TeleopuppHubAtt,
-                                                TeleopuppHubComp: this.state.TeleopuppHubComp,
-                                                TeleoplowerHubAtt: this.state.TeleoplowerHubAtt,
-                                                TeleoplowerHubComp: this.state.TeleoplowerHubComp
+                                                    TeleopuppHubAtt: this.state.TeleopuppHubAtt,
+                                                    TeleopuppHubComp: this.state.TeleopuppHubComp,
+                                                    TeleoplowerHubAtt: this.state.TeleoplowerHubAtt,
+                                                    TeleoplowerHubComp: this.state.TeleoplowerHubComp
 
 
-                                            }),
-                                            GenerateQrCode: true
+                                                }),
+                                                GenerateQrCode: true
 
-                                        })
-                                        this.RESET()
-                                    }}>
-                                    <Text style={{ fontSize: 22 }}>SUBMIT</Text>
-                                </TouchableOpacity>
+                                            })
+                                        }}>
+                                        <Text style={{ fontSize: 22 }}>SUBMIT</Text>
+
+                                    </TouchableOpacity>
+
+                                </View>
                                 {this.state.GenerateQrCode &&
-                                    <View style={{ alignSelf: 'center', marginTop: 15 }}>
+                                    <View style={{ alignSelf: 'center', marginTop: 15, alignItems: 'center' }}>
                                         <this.QRCODE
                                             value={this.state.currQRCode}
                                         />
+                                        <TouchableOpacity onPress={() => { this.createTwoButtonAlert() }} style={styles.Reset}>
+                                            <Text>New Match?</Text>
+                                        </TouchableOpacity>
                                     </View>
+
                                 }
                             </View>
                         </ScrollView>
@@ -466,14 +493,24 @@ const styles = StyleSheet.create({
     CounterView: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: 7
+        marginTop: 7,
+        width: Math.max(width_proportion * 0.6, 340),
     },
     Submit: {
-        alignSelf: 'center',
         marginTop: 10,
         width: 200,
         height: 40,
         backgroundColor: 'green',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4
+    },
+    Reset: {
+        marginTop: 10,
+        width: 200,
+        height: 40,
+        borderColor: 'black',
+        borderWidth: 2,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4
@@ -498,12 +535,11 @@ const styles = StyleSheet.create({
     TopBottomBanner: {
         backgroundColor: 'grey',
         flex: 0.05,
-        justifyContent: 'space-evenly',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     Title: {
-        fontSize: 17,
+        fontSize: height_proportion * 0.02,
         fontWeight: 'bold',
     },
     MainContent: {
@@ -512,7 +548,7 @@ const styles = StyleSheet.create({
     },
     InputView: {
         borderColor: 'grey',
-        width: width_proportion * 0.8,
+        width: Math.max(width_proportion * 0.5, 300),
         borderWidth: 1,
         height: 35,
         borderRadius: 3,
@@ -530,7 +566,7 @@ const styles = StyleSheet.create({
     },
     InputView2: {
         borderColor: 'grey',
-        width: width_proportion * 0.8,
+        width: Math.max(width_proportion * 0.5, 300),
         borderWidth: 1,
         height: 100,
         borderRadius: 3,
