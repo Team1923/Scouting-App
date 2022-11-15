@@ -494,7 +494,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginTop: 7,
-        width: Math.max(width_proportion * 0.6, 340),
+        width: Math.max(width_proportion * 0.8, 340),
     },
     Submit: {
         marginTop: 10,
@@ -548,7 +548,7 @@ const styles = StyleSheet.create({
     },
     InputView: {
         borderColor: 'grey',
-        width: Math.max(width_proportion * 0.5, 300),
+        width: Math.max(width_proportion * 0.7, 300),
         borderWidth: 1,
         height: 35,
         borderRadius: 3,
@@ -566,7 +566,7 @@ const styles = StyleSheet.create({
     },
     InputView2: {
         borderColor: 'grey',
-        width: Math.max(width_proportion * 0.5, 300),
+        width: Math.max(width_proportion * 0.7, 300),
         borderWidth: 1,
         height: 100,
         borderRadius: 3,
