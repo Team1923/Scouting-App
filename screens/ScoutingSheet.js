@@ -15,27 +15,44 @@ export default class ScoutingSheet extends Component {
             teamNumber: '',
             matchNumber: '',
             color: '',
-            crossTarmac: 0,
-            climbAttempted: 0,
-            primaryScoringLocation: '',
-            climbLevel: '0',
-            stopForMoreThan10Secs: 0,
+            crossCommunity: 0,
+            chargeAttemptedAuton: 0,
+            chargeRecievedAuton: '',
+            chargeAttemptedEndgame: 0,
+            chargeRecievedAEndgame: '',
+            numberRobotsChargingEndgame: '0',
+            retrieveCargo: '',
+            defenseBot: 0,
+            ferryingPickup: 0,
+            linkNumber: '0',
+            coopertitonBonus: 0,
+            robotDisconnect: 0,
             secsStopped: '0',
             RSLStatus: '',
             Notes: '',
+
             GenerateQrCode: false,
 
-            AutonuppHubAtt: 0,
-            AutonuppHubComp: 0,
-            AutonlowerHubAtt: 0,
-            AutonlowerHubComp: 0,
+            AutonCubeHigh: 0,
+            AutonCubeMid: 0,
+            AutonCubeLow: 0,
+            
+            AutonConeHigh: 0,
+            AutonConeMid: 0,
+            AutonConeLow: 0,
 
-            TeleopuppHubAtt: 0,
-            TeleopuppHubComp: 0,
-            TeleoplowerHubAtt: 0,
-            TeleoplowerHubComp: 0,
+            TeleopCubeHigh: 0,
+            TeleopCubeMid: 0,
+            TeleopCubeLow: 0,
+            TeleopCubeDropped: 0,
 
-            currQRCode: JSON.stringify({ h: 3 })
+            TeleopConeHigh: 0,
+            TeleopConeMid: 0,
+            TeleopConeLow: 0,
+            TeleopConeDropped: 0,
+
+
+            currQRCode: JSON.stringify({ })
 
         }
     }
@@ -71,25 +88,43 @@ export default class ScoutingSheet extends Component {
             teamNumber: '',
             matchNumber: '',
             color: '',
-            crossTarmac: 0,
-            climbAttempted: 0,
-            primaryScoringLocation: '',
-            climbLevel: '0',
-            stopForMoreThan10Secs: 0,
+            crossCommunity: 0,
+            chargeAttemptedAuton: 0,
+            chargeRecievedAuton: '',
+            chargeAttemptedEndgame: 0,
+            chargeRecievedAEndgame: '',
+            numberRobotsChargingEndgame: '0',
+            retrieveCargo: '',
+            defenseBot: 0,
+            ferryingPickup: 0,
+            linkNumber: '0',
+            coopertitonBonus: 0,
+            robotDisconnect: 0,
             secsStopped: '0',
             RSLStatus: '',
             Notes: '',
 
-            AutonuppHubAtt: 0,
-            AutonuppHubComp: 0,
-            AutonlowerHubAtt: 0,
-            AutonlowerHubComp: 0,
+            GenerateQrCode: false,
 
-            TeleopuppHubAtt: 0,
-            TeleopuppHubComp: 0,
-            TeleoplowerHubAtt: 0,
-            TeleoplowerHubComp: 0,
-            GenerateQrCode: false
+            AutonCubeHigh: 0,
+            AutonCubeMid: 0,
+            AutonCubeLow: 0,
+            
+            AutonConeHigh: 0,
+            AutonConeMid: 0,
+            AutonConeLow: 0,
+
+            TeleopCubeHigh: 0,
+            TeleopCubeMid: 0,
+            TeleopCubeLow: 0,
+            TeleopCubeDropped: 0,
+
+            TeleopConeHigh: 0,
+            TeleopConeMid: 0,
+            TeleopConeLow: 0,
+            TeleopConeDropped: 0,
+
+
 
         })
     }
@@ -169,209 +204,321 @@ export default class ScoutingSheet extends Component {
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Auton</Text>
                                 <Divider style={{ marginTop: 5 }} />
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    <Text style={styles.CheckboxText}>Cross Tarmac</Text>
+                                    <Text style={styles.CheckboxText}>Cross Community Line</Text>
                                     <View style={{ marginLeft: 5 }}>
                                         <Checkbox.Android
-                                            status={this.state.crossTarmac == 1 ? 'checked' : 'unchecked'}
-                                            onPress={() => this.state.crossTarmac == 1 ? this.setState({ crossTarmac: 0 }) : this.setState({ crossTarmac: 1 })}
+                                            status={this.state.crossCommunity == 1 ? 'checked' : 'unchecked'}
+                                            onPress={() => this.state.crossCommunity == 1 ? this.setState({ crossCommunity: 0 }) : this.setState({ crossCommunity: 1 })}
 
                                         />
                                     </View>
 
                                 </View>
-
-                                <View style={styles.CounterView}>
-
-                                    <View style={{ justifyContent: 'flex-end' }}>
-                                        <Text style={{ fontSize: 18 }}>Upper Attempted</Text>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonuppHubAtt: Math.max(0, this.state.AutonuppHubAtt - 1) }) }}>
-                                                <Text style={styles.ArgText}>-</Text>
-                                            </TouchableOpacity>
-                                            <Text style={styles.ArgText}>{this.state.AutonuppHubAtt}</Text>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonuppHubAtt: this.state.AutonuppHubAtt + 1 }) }}>
-                                                <Text style={styles.ArgText}>+</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-
-                                    <View style={{ justifyContent: 'flex-end' }}>
-                                        <Text style={{ fontSize: 18 }}>Upper Completed</Text>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonuppHubComp: Math.max(0, this.state.AutonuppHubComp - 1) }) }}>
-                                                <Text style={styles.ArgText}>-</Text>
-                                            </TouchableOpacity>
-                                            <Text style={styles.ArgText}>{this.state.AutonuppHubComp}</Text>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonuppHubComp: this.state.AutonuppHubComp + 1 }) }}>
-                                                <Text style={styles.ArgText}>+</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                </View>
-
-                                <View style={styles.CounterView}>
-                                    <View style={{ justifyContent: 'flex-end' }}>
-                                        <Text style={{ fontSize: 18 }}>Lower Attempted</Text>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonlowerHubAtt: Math.max(this.state.AutonlowerHubAtt - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
-                                            <Text style={styles.ArgText}>{this.state.AutonlowerHubAtt}</Text>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonlowerHubAtt: this.state.AutonlowerHubAtt + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
-                                        </View>
-                                    </View>
-
-                                    <View style={{ justifyContent: 'flex-end' }}>
-                                        <Text style={{ fontSize: 18 }}>Lower Completed</Text>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonlowerHubComp: Math.max(this.state.AutonlowerHubComp - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
-                                            <Text style={styles.ArgText}>{this.state.AutonlowerHubComp}</Text>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonlowerHubComp: this.state.AutonlowerHubComp + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
-                                        </View>
-                                    </View>
-                                </View>
-
-
-                                {/* TELEOP STARTS HERE*/}
-
-
-                                <Text style={{ fontSize: 25, marginTop: 10 }}>Teleop</Text>
-                                <Divider style={{ marginTop: 5 }} />
-
-                                <View style={styles.CounterView}>
-
-                                    <View style={{ justifyContent: 'flex-end' }}>
-                                        <Text style={{ fontSize: 18 }}>Upper Attempted</Text>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopuppHubAtt: Math.max(0, this.state.TeleopuppHubAtt - 1) }) }}>
-                                                <Text style={styles.ArgText}>-</Text>
-                                            </TouchableOpacity>
-                                            <Text style={styles.ArgText}>{this.state.TeleopuppHubAtt}</Text>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopuppHubAtt: this.state.TeleopuppHubAtt + 1 }) }}>
-                                                <Text style={styles.ArgText}>+</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-
-                                    <View style={{ justifyContent: 'flex-end' }}>
-                                        <Text style={{ fontSize: 18 }}>Upper Completed</Text>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopuppHubComp: Math.max(0, this.state.TeleopuppHubComp - 1) }) }}>
-                                                <Text style={styles.ArgText}>-</Text>
-                                            </TouchableOpacity>
-                                            <Text style={styles.ArgText}>{this.state.TeleopuppHubComp}</Text>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopuppHubComp: this.state.TeleopuppHubComp + 1 }) }}>
-                                                <Text style={styles.ArgText}>+</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    </View>
-                                </View>
-
-                                <View style={styles.CounterView}>
-                                    <View style={{ justifyContent: 'flex-end' }}>
-                                        <Text style={{ fontSize: 18 }}>Lower Attempted</Text>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleoplowerHubAtt: Math.max(0, this.state.TeleoplowerHubAtt - 1) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
-                                            <Text style={styles.ArgText}>{this.state.TeleoplowerHubAtt}</Text>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleoplowerHubAtt: this.state.TeleoplowerHubAtt + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
-                                        </View>
-                                    </View>
-
-                                    <View style={{ justifyContent: 'flex-end' }}>
-                                        <Text style={{ fontSize: 18 }}>Lower Completed</Text>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleoplowerHubComp: Math.max(0, this.state.TeleoplowerHubComp - 1) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
-                                            <Text style={styles.ArgText}>{this.state.TeleoplowerHubComp}</Text>
-                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleoplowerHubComp: this.state.TeleoplowerHubComp + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
-                                        </View>
-                                    </View>
-                                </View>
-                                <Text style={{ fontSize: 19, marginTop: 7 }}>Primary Teleop Scoring Location</Text>
-                                <View style={styles.InputView2}>
-                                    <TextInput
-                                        style={styles.InfoInput}
-                                        value={this.state.primaryScoringLocation}
-                                        onChangeText={(Text) => { this.setState({ primaryScoringLocation: Text }) }}
-                                        multiline={true}
-                                    >
-                                    </TextInput>
-                                </View>
-
-
-                                {/* ENGAME STARTS HERE*/}
-
-
-                                <Text style={{ fontSize: 25, marginTop: 10 }}>Endgame</Text>
-                                <Divider style={{ marginTop: 5 }} />
-                                <View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center' }}>
-                                    <Text style={styles.CheckboxText}>Attempted Climb</Text>
+                                <View style={{ flexDirection: 'row', marginTop: 3, alignItems: 'center' }}>
+                                    <Text style={styles.CheckboxText}>Attempted Charging Station</Text>
                                     <View style={{ marginLeft: 5 }}>
                                         <Checkbox.Android
-                                            status={this.state.climbAttempted == 1 ? 'checked' : 'unchecked'}
-                                            onPress={() => this.state.climbAttempted == 1 ? this.setState({ climbAttempted: 0, climbLevel: '0' }) : this.setState({ climbAttempted: 1 })}
+                                            status={this.state.chargeAttemptedAuton == 1 ? 'checked' : 'unchecked'}
+                                            onPress={() => this.state.chargeAttemptedAuton == 1 ? this.setState({ chargeAttemptedAuton: 0, chargeRecievedAuton: '' }) : this.setState({ chargeAttemptedAuton: 1 })}
                                         />
                                     </View>
                                 </View>
-                                {this.state.climbAttempted == 1 &&
-                                    <View style={{ flexDirection: 'column', marginTop: 5 }}>
-                                        <Text style={{ fontSize: 20 }}>Climb Level:</Text>
+                                {this.state.chargeAttemptedAuton == 1 &&
+                                    <View style={{ flexDirection: 'column', marginTop: 2 }}>
                                         <View style={{ flexDirection: 'row' }}>
                                             <View style={styles.TeamClimb}>
                                                 <RadioButton.Android
-                                                    value="0"
-                                                    status={this.state.climbLevel === '0' ? 'checked' : 'unchecked'}
-                                                    onPress={() => this.setState({ climbLevel: '0' })}
+                                                    value="Docked"
+                                                    status={this.state.chargeRecievedAuton === 'Docked' ? 'checked' : 'unchecked'}
+                                                    onPress={() => this.setState({ chargeRecievedAuton: 'Docked' })}
                                                 />
-                                                <Text style={{ fontSize: 20 }} >0</Text>
+                                                <Text style={{ fontSize: 20 }} >Docked</Text>
                                             </View>
                                             <View style={styles.TeamClimb}>
                                                 <RadioButton.Android
-                                                    value="1"
-                                                    status={this.state.climbLevel === '4' ? 'checked' : 'unchecked'}
-                                                    onPress={() => this.setState({ climbLevel: '4' })}
+                                                    value="Engaged"
+                                                    status={this.state.chargeRecievedAuton === 'Engaged' ? 'checked' : 'unchecked'}
+                                                    onPress={() => this.setState({ chargeRecievedAuton: 'Engaged' })}
                                                 />
-                                                <Text style={{ fontSize: 20 }} >1</Text>
+                                                <Text style={{ fontSize: 20 }} >Engaged</Text>
                                             </View>
 
-                                            <View style={styles.TeamClimb}>
-                                                <RadioButton.Android
-                                                    value="2"
-                                                    status={this.state.climbLevel === '6' ? 'checked' : 'unchecked'}
-                                                    onPress={() => this.setState({ climbLevel: '6' })}
-                                                />
-                                                <Text style={{ fontSize: 20 }}>2</Text>
-                                            </View>
-                                            <View style={styles.TeamClimb}>
-                                                <RadioButton.Android
-                                                    value="3"
-                                                    status={this.state.climbLevel === '10' ? 'checked' : 'unchecked'}
-                                                    onPress={() => this.setState({ climbLevel: '10' })}
-                                                />
-                                                <Text style={{ fontSize: 20 }}>3</Text>
-                                            </View>
-                                            <View style={styles.TeamClimb}>
-                                                <RadioButton.Android
-                                                    value="2"
-                                                    status={this.state.climbLevel === '15' ? 'checked' : 'unchecked'}
-                                                    onPress={() => this.setState({ climbLevel: '15' })}
-                                                />
-                                                <Text style={{ fontSize: 20 }}>T</Text>
-                                            </View>
+                                    
                                         </View>
                                     </View>
                                 }
-                                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                                    <Text style={{ maxWidth: width_proportion * 0.7, fontSize: 18 }}>Did the Robot Stop moving for more than 10 secs?</Text>
+                                <View style={styles.CounterView}>
+
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{ fontSize: 19, alignSelf: 'center' }}>Cube Upper</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeHigh: Math.max(0, this.state.AutonCubeHigh - 1) }) }}>
+                                                <Text style={styles.ArgText}>-</Text>
+                                            </TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonCubeHigh}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeHigh: this.state.AutonCubeHigh + 1 }) }}>
+                                                <Text style={styles.ArgText}>+</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{ fontSize: 19, alignSelf: 'center'  }}>Cone Upper</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeHigh: Math.max(0, this.state.AutonConeHigh - 1) }) }}>
+                                                <Text style={styles.ArgText}>-</Text>
+                                            </TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonConeHigh}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeHigh: this.state.AutonConeHigh + 1 }) }}>
+                                                <Text style={styles.ArgText}>+</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+
+                                <View style={styles.CounterView}>
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cube Middle</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeMid: Math.max(this.state.AutonCubeMid - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonCubeMid}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeMid: this.state.AutonCubeMid + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center' }}>Cone Middle</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeMid: Math.max(this.state.AutonConeMid - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonConeMid}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeMid: this.state.AutonConeMid + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+
+                                <View style={styles.CounterView}>
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cube Lower</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeLow: Math.max(this.state.AutonCubeLow - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonCubeLow}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeLow: this.state.AutonCubeLow + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cone Lower</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeLow: Math.max(this.state.AutonConeLow - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonConeLow}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeLow: this.state.AutonConeLow + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+
+                                {/* TELEOP STARTS HERE*/}
+                                
+                                
+
+                                <Text style={{ fontSize: 25, marginTop: 10 }}>Teleop</Text>
+
+                                
+
+                                <Divider style={{ marginTop: 5 }} />
+
+                                <Text style={{fontSize: 21, marginTop: 10}}>Cargo Retrieval Location</Text>
+                                <View style={styles.TeamClimb}>
+                                    <Checkbox.Android
+                                        value="Single"
+                                        status={this.state.retrieveCargo.includes('Single') ? 'checked' : 'unchecked'}
+                                        onPress={() => this.state.retrieveCargo.includes('Single ') ? this.setState({ retrieveCargo: this.state.retrieveCargo.replace("Single ", "") }) 
+                                        : this.setState({ retrieveCargo: this.state.retrieveCargo += "Single " })}
+                                    />
+                                    <Text style={{ fontSize: 20 }} >Single</Text>
+                                </View>
+                                <View style={styles.TeamClimb}>
+                                    <Checkbox.Android
+                                        value="Double"
+                                        status={this.state.retrieveCargo.includes('Double') ? 'checked' : 'unchecked'}
+                                        onPress={() => this.state.retrieveCargo.includes('Double ') ? this.setState({ retrieveCargo: this.state.retrieveCargo.replace("Double ", "") }) 
+                                        : this.setState({ retrieveCargo: this.state.retrieveCargo += "Double " })}
+                                    />
+                                    <Text style={{ fontSize: 20 }} >Double</Text>
+                                </View>
+                                <View style={styles.TeamClimb}>
+                                    <Checkbox.Android
+                                        value="On Field"
+                                        status={this.state.retrieveCargo.includes('On Field') ? 'checked' : 'unchecked'}
+                                        onPress={() => this.state.retrieveCargo.includes('On Field ') ? this.setState({ retrieveCargo: this.state.retrieveCargo.replace("On Field ", "") }) 
+                                        : this.setState({ retrieveCargo: this.state.retrieveCargo += "On Field " })}
+                                    />
+                                    <Text style={{ fontSize: 20 }} >On Field</Text>
+                                </View>
+                                <View style={styles.TeamClimb}>
+                                    <Checkbox.Android
+                                        value="N/A"
+                                        status={this.state.retrieveCargo.includes('N/A') ? 'checked' : 'unchecked'}
+                                        onPress={() => this.state.retrieveCargo.includes('N/A ') ? this.setState({ retrieveCargo: this.state.retrieveCargo.replace("N/A ", "") }) 
+                                        : this.setState({ retrieveCargo: this.state.retrieveCargo += "N/A " })}
+                                        
+
+                                    />
+                                    <Text style={{ fontSize: 20 }} >N/A</Text>
+                                </View>
+
+
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={styles.CheckboxText}>Defense Bot</Text>
+                                    <View style={{ marginLeft: 5 }}>
+                                        <Checkbox.Android
+                                            status={this.state.defenseBot == 1 ? 'checked' : 'unchecked'}
+                                            onPress={() => this.state.defenseBot == 1 ? this.setState({ defenseBot: 0 }) : this.setState({ defenseBot: 1 })}
+
+                                        />
+                                    </View>
+
+                                </View>
+
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={styles.CheckboxText}>Ferrying/Pickup Bot</Text>
+                                    <View style={{ marginLeft: 5 }}>
+                                        <Checkbox.Android
+                                            status={this.state.ferryingPickup == 1 ? 'checked' : 'unchecked'}
+                                            onPress={() => this.state.ferryingPickup == 1 ? this.setState({ ferryingPickup: 0 }) : this.setState({ ferryingPickup: 1 })}
+
+                                        />
+                                    </View>
+
+                                </View>
+
+                                <View style={styles.CounterView}>
+
+                                <View style={styles.InnerCounterView}>
+                                    <Text style={{ fontSize: 19, alignSelf: 'center' }}>Cube Upper</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopCubeHigh: Math.max(0, this.state.TeleopCubeHigh - 1) }) }}>
+                                            <Text style={styles.ArgText}>-</Text>
+                                        </TouchableOpacity>
+                                        <Text style={styles.ArgText}>{this.state.TeleopCubeHigh}</Text>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopCubeHigh: this.state.TeleopCubeHigh + 1 }) }}>
+                                            <Text style={styles.ArgText}>+</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+
+                                <View style={styles.InnerCounterView}>
+                                    <Text style={{ fontSize: 19, alignSelf: 'center'  }}>Cone Upper</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopConeHigh: Math.max(0, this.state.TeleopConeHigh - 1) }) }}>
+                                            <Text style={styles.ArgText}>-</Text>
+                                        </TouchableOpacity>
+                                        <Text style={styles.ArgText}>{this.state.TeleopConeHigh}</Text>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopConeHigh: this.state.TeleopConeHigh + 1 }) }}>
+                                            <Text style={styles.ArgText}>+</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                </View>
+
+                                <View style={styles.CounterView}>
+                                <View style={styles.InnerCounterView}>
+                                    <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cube Middle</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopCubeMid: Math.max(this.state.TeleopCubeMid - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                        <Text style={styles.ArgText}>{this.state.TeleopCubeMid}</Text>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopCubeMid: this.state.TeleopCubeMid + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                    </View>
+                                </View>
+
+                                <View style={styles.InnerCounterView}>
+                                    <Text style={{  fontSize: 19, alignSelf: 'center' }}>Cone Middle</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopConeMid: Math.max(this.state.TeleopConeMid - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                        <Text style={styles.ArgText}>{this.state.TeleopConeMid}</Text>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopConeMid: this.state.TeleopConeMid + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                    </View>
+                                </View>
+                                </View>
+
+                                <View style={styles.CounterView}>
+                                <View style={styles.InnerCounterView}>
+                                    <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cube Lower</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopCubeLow: Math.max(this.state.TeleopCubeLow - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                        <Text style={styles.ArgText}>{this.state.TeleopCubeLow}</Text>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopCubeLow: this.state.TeleopCubeLow + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                    </View>
+                                </View>
+
+                                <View style={styles.InnerCounterView}>
+                                    <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cone Lower</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopConeLow: Math.max(this.state.TeleopConeLow - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                        <Text style={styles.ArgText}>{this.state.TeleopConeLow}</Text>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopConeLow: this.state.TeleopConeLow + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                    </View>
+                                </View>
+                                </View>
+                                <View style={styles.CounterView}>
+
+                                <View style={styles.InnerCounterView}>
+                                    <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cube Drop</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopCubeDropped: Math.max(this.state.TeleopCubeDropped - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                        <Text style={styles.ArgText}>{this.state.TeleopCubeDropped}</Text>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopCubeDropped: this.state.TeleopCubeDropped + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                    </View>
+                                </View>
+
+                                <View style={styles.InnerCounterView}>
+                                    <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cone Drop</Text>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopConeDropped: Math.max(this.state.TeleopConeDropped - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                        <Text style={styles.ArgText}>{this.state.TeleopConeDropped}</Text>
+                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopConeDropped: this.state.TeleopConeDropped + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                    </View>
+                                </View>
+                                </View>
+
+                                <View style={{ flexDirection: 'row', marginTop: 13 }}>
+                                        <Text style={{ fontSize: 20 }}>Number of Links</Text>
+                                        <View style={styles.SameLineInputView}>
+                                            <TextInput
+                                                style={styles.InfoInput}
+                                                keyboardType='numeric'
+                                                value={this.state.linkNumber}
+                                                onChangeText={(Number) => { this.setState({ linkNumber: Number }) }}
+                                            >
+                                            </TextInput>
+                                        </View>
+                                 </View>
+
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={styles.CheckboxText}>Coopertiton Bonus</Text>
+                                    <View style={{ marginLeft: 5 }}>
+                                        <Checkbox.Android
+                                            status={this.state.coopertitonBonus == 1 ? 'checked' : 'unchecked'}
+                                            onPress={() => this.state.coopertitonBonus == 1 ? this.setState({ coopertitonBonus: 0 }) : this.setState({ coopertitonBonus: 1 })}
+
+                                        />
+                                    </View>
+
+                                </View>
+
+                                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 1 }}>
+                                    <Text style={{ maxWidth: width_proportion * 0.7, fontSize: 20 }}>Did the Robot Disconnect</Text>
                                     <View style={{ marginLeft: 4 }}>
                                         <Checkbox.Android
-                                            status={this.state.stopForMoreThan10Secs == 1 ? 'checked' : 'unchecked'}
-                                            onPress={() => this.state.stopForMoreThan10Secs == 1 ? this.setState({ stopForMoreThan10Secs: 0, secsStopped: '0' }) : this.setState({ stopForMoreThan10Secs: 1 })}
+                                            status={this.state.robotDisconnect == 1 ? 'checked' : 'unchecked'}
+                                            onPress={() => this.state.robotDisconnect == 1 ? this.setState({ robotDisconnect: 0, secsStopped: '0' }) : this.setState({ robotDisconnect: 1 })}
                                         />
                                     </View>
                                 </View>
-                                {this.state.stopForMoreThan10Secs == 1 &&
-                                    <View style={{ flexDirection: 'row', marginTop: 9 }}>
+                                {this.state.robotDisconnect == 1 &&
+                                    <View style={{ flexDirection: 'row', marginTop: 4, marginLeft: 7 }}>
                                         <Text style={{ fontSize: 19 }}>How long(seconds):</Text>
                                         <View style={styles.SameLineInputView}>
-                                            <TextInput
+                                            <TextInput d
                                                 style={styles.InfoInput}
                                                 keyboardType='numeric'
                                                 value={this.state.secsStopped}
@@ -381,14 +528,16 @@ export default class ScoutingSheet extends Component {
                                         </View>
                                     </View>
                                 }
-                                <Text style={styles.ArgText}>RSL Status</Text>
+
+                                <Text style={{fontSize: 21, marginTop: 3}}>RSL Status</Text>
+                                <View style={{flexDirection: 'row'}}>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
                                         value="Blinking Orange"
                                         status={this.state.RSLStatus === 'Blinking Orange' ? 'checked' : 'unchecked'}
                                         onPress={() => this.setState({ RSLStatus: 'Blinking Orange' })}
                                     />
-                                    <Text style={{ fontSize: 20 }} >Blinking Orange</Text>
+                                    <Text style={{ fontSize: 20 }} >Blinking</Text>
                                 </View>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
@@ -396,7 +545,7 @@ export default class ScoutingSheet extends Component {
                                         status={this.state.RSLStatus === 'Solid Orange' ? 'checked' : 'unchecked'}
                                         onPress={() => this.setState({ RSLStatus: 'Solid Orange' })}
                                     />
-                                    <Text style={{ fontSize: 20 }} >Solid Orange</Text>
+                                    <Text style={{ fontSize: 20 }} >Off</Text>
                                 </View>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
@@ -404,7 +553,7 @@ export default class ScoutingSheet extends Component {
                                         status={this.state.RSLStatus === 'No Lit' ? 'checked' : 'unchecked'}
                                         onPress={() => this.setState({ RSLStatus: 'No Lit' })}
                                     />
-                                    <Text style={{ fontSize: 20 }} >No Lit</Text>
+                                    <Text style={{ fontSize: 20 }} >Solid</Text>
                                 </View>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
@@ -412,8 +561,71 @@ export default class ScoutingSheet extends Component {
                                         status={this.state.RSLStatus === 'Not Visible' ? 'checked' : 'unchecked'}
                                         onPress={() => this.setState({ RSLStatus: 'Not Visible' })}
                                     />
-                                    <Text style={{ fontSize: 20 }} >Not Visible</Text>
+                                    <Text style={{ fontSize: 20 }} >N/A</Text>
                                 </View>
+
+                                </View>
+
+                                {/* ENGAME STARTS HERE*/}
+
+
+                                <Text style={{ fontSize: 25, marginTop: 10 }}>Endgame</Text>
+                                <Divider style={{ marginTop: 5 }} />
+                                
+                                <View style={{ flexDirection: 'row', marginTop: 3, alignItems: 'center' }}>
+                                    <Text style={styles.CheckboxText}>Attempted Charging Station</Text>
+                                    <View style={{ marginLeft: 5 }}>
+                                        <Checkbox.Android
+                                            status={this.state.chargeAttemptedEndgame == 1 ? 'checked' : 'unchecked'}
+                                            onPress={() => this.state.chargeAttemptedEndgame == 1 ? this.setState({ chargeAttemptedEndgame: 0, chargeRecievedAEndgame: '' }) : this.setState({ chargeAttemptedEndgame: 1 })}
+                                        />
+                                    </View>
+                                </View>
+                                {this.state.chargeAttemptedEndgame == 1 &&
+                                    <View style={{ flexDirection: 'column', marginTop: 2 }}>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <View style={styles.TeamClimb}>
+                                                <RadioButton.Android
+                                                    value="Parked"
+                                                    status={this.state.chargeRecievedAEndgame === 'Parked' ? 'checked' : 'unchecked'}
+                                                    onPress={() => this.setState({ chargeRecievedAEndgame: 'Parked' })}
+                                                />
+                                                <Text style={{ fontSize: 20 }} >Parked</Text>
+                                            </View>
+                                            <View style={styles.TeamClimb}>
+                                                <RadioButton.Android
+                                                    value="Docked"
+                                                    status={this.state.chargeRecievedAEndgame === 'Docked' ? 'checked' : 'unchecked'}
+                                                    onPress={() => this.setState({ chargeRecievedAEndgame: 'Docked' })}
+                                                />
+                                                <Text style={{ fontSize: 20 }} >Docked</Text>
+                                            </View>
+                                            <View style={styles.TeamClimb}>
+                                                <RadioButton.Android
+                                                    value="Engaged"
+                                                    status={this.state.chargeRecievedAEndgame === 'Engaged' ? 'checked' : 'unchecked'}
+                                                    onPress={() => this.setState({ chargeRecievedAEndgame: 'Engaged' })}
+                                                />
+                                                <Text style={{ fontSize: 20 }} >Engaged</Text>
+                                            </View>
+                                    
+                                        </View>
+                                    </View>
+                                }
+                                
+                                <View style={{ flexDirection: 'row', marginTop: 9 }}>
+                                        <Text style={{ fontSize: 20 }}># of Robots Charging</Text>
+                                        <View style={styles.SameLineInputView}>
+                                            <TextInput
+                                                style={styles.InfoInput}
+                                                keyboardType='numeric'
+                                                value={this.state.numberRobotsChargingEndgame}
+                                                onChangeText={(Number) => { this.setState({ numberRobotsChargingEndgame: Number }) }}
+                                            >
+                                            </TextInput>
+                                        </View>
+                                 </View>
+                                
                                 <Text style={{ fontSize: 19, marginTop: 7 }}>Additional Notes</Text>
                                 <View style={styles.InputView2}>
                                     <TextInput
@@ -435,24 +647,40 @@ export default class ScoutingSheet extends Component {
                                                     teamNumber: this.state.teamNumber,
                                                     matchNumber: this.state.matchNumber,
                                                     color: this.state.color,
-                                                    crossTarmac: this.state.crossTarmac,
-                                                    climbAttempted: this.state.climbAttempted,
-                                                    primaryScoringLocation: this.state.primaryScoringLocation,
-                                                    climbLevel: this.state.climbLevel,
-                                                    stopForMoreThan10Secs: this.state.stopForMoreThan10Secs,
+                                                    crossCommunity: this.state.crossCommunity,
+                                                    chargeAttemptedAuton: this.state.chargeAttemptedAuton,
+                                                    chargeRecievedAuton: this.state.chargeRecievedAuton,
+                                                    chargeAttemptedEndgame: this.state.chargeAttemptedEndgame,
+                                                    chargeRecievedAEndgame: this.state.chargeRecievedAEndgame,
+                                                    numberRobotsChargingEndgame: this.state.numberRobotsChargingEndgame,
+                                                    retrieveCargo: this.state.retrieveCargo,
+                                                    defenseBot: this.state.defenseBot,
+                                                    ferryingPickup: this.state.ferryingPickup,
+                                                    linkNumber: this.state.linkNumber,
+                                                    coopertitonBonus: this.state.coopertitonBonus,
+                                                    robotDisconnect: this.state.robotDisconnect,
                                                     secsStopped: this.state.secsStopped,
                                                     RSLStatus: this.state.RSLStatus,
                                                     Notes: this.state.Notes,
 
-                                                    AutonuppHubAtt: this.state.AutonuppHubAtt,
-                                                    AutonuppHubComp: this.state.AutonuppHubComp,
-                                                    AutonlowerHubAtt: this.state.AutonlowerHubAtt,
-                                                    AutonlowerHubComp: this.state.AutonlowerHubComp,
+                                                    AutonCubeHigh: this.state.AutonCubeHigh,
+                                                    AutonCubeMid: this.state.AutonCubeMid,
+                                                    AutonCubeLow: this.state.AutonCubeLow,
+                                                    
+                                                    AutonConeHigh: this.state.AutonConeHigh,
+                                                    AutonConeMid: this.state.AutonConeMid,
+                                                    AutonConeLow: this.state.AutonConeLow,
+                                        
+                                                    TeleopCubeHigh: this.state.TeleopCubeHigh,
+                                                    TeleopCubeMid: this.state.TeleopCubeMid,
+                                                    TeleopCubeLow: this.state.TeleopCubeLow,
+                                                    TeleopCubeDropped: this.state.TeleopCubeDropped,
 
-                                                    TeleopuppHubAtt: this.state.TeleopuppHubAtt,
-                                                    TeleopuppHubComp: this.state.TeleopuppHubComp,
-                                                    TeleoplowerHubAtt: this.state.TeleoplowerHubAtt,
-                                                    TeleoplowerHubComp: this.state.TeleoplowerHubComp
+                                                    TeleopConeHigh: this.state.TeleopConeHigh,
+                                                    TeleopConeMid: this.state.TeleopConeMid,
+                                                    TeleopConeLow: this.state.TeleopConeLow,
+                                                    TeleopConeDropped: this.state.TeleopConeDropped,
+
 
 
                                                 }),
@@ -495,6 +723,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         marginTop: 7,
         width: Math.max(width_proportion * 0.8, 340),
+    },
+    InnerCounterView: {
+        justifyContent: 'flex-end', width: 120 
     },
     Submit: {
         marginTop: 10,

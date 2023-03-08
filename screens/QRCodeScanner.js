@@ -106,7 +106,6 @@ export default class QRCodeScanner extends Component {
 
     render() {
         return (
-
             <SafeAreaView style={this.containerStyle()}>
                 <View style={styles.TopBottomBanner}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate("ScoutingSheet")}><Text style={styles.Title}>MidKnight Inventors Scouting App</Text></TouchableOpacity>
@@ -144,10 +143,7 @@ export default class QRCodeScanner extends Component {
                                 <Text style={{ alignSelf: 'center', marginTop: 5, fontSize: 20 }}>{this.state.ResponseText}</Text>
                         }
                     </ScrollView>
-
-
                 </View>
-
             </SafeAreaView>
         )
     }
