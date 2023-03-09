@@ -7,10 +7,15 @@
       "**/*"
     ],
     "android": {
-      "package": "com.turtlez200.RoboticsScoutingApp"
+      "package": "com.RoboticsScoutingApp.RoboticsScoutingApp"
     },
     "ios": {
       "bundleIdentifier": "com.turtlez200.RoboticsScoutingApp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d1a44166-2cf0-4949-89b8-49447c890677"
+      }
     }
   }
 }

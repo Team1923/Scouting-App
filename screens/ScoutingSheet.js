@@ -775,7 +775,6 @@ const styles = StyleSheet.create({
     },
     MainContent: {
         flex: 0.95,
-        padding: 10
     },
     InputView: {
         borderColor: 'grey',

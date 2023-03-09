@@ -17,12 +17,14 @@ export default class QRCodeScanner extends Component {
             hasPermission: null,
             scanned: false,
             tableHead:
-                ['Team #', 'Match #', 'Alliance', 'Cross Tarmac',
-                    'Auto Upp Hub Att', 'Auto Upp Hub Comp', 'Auto Lower Hub Att', 'Auto Lower Hub Comp',
-                    'Teleop Upp Hub Att', 'Teleop Upp Hub Comp', 'Teleop Lower Hub Att', 'Teleop Lower Hub Comp',
-                    'Teleop Scoring Location', 'Att Climb', 'Climb', 'Stop moving for >10 sec', 'how long', 'RSL status', 'Notes'],
+                ['Team #', 'Match #', 'Alliance', 'Cross Community Line',
+                    'Auto Charge Att.', 'Auto Charge Comp.', 'Auto Cone Low', 'Auto Cone Mid',
+                    'Auto Cone High','Auto Cube Low', 'Auto Cube Mid', 'Auto Cube High', 'Pickup Location', 'Defense Bot',
+                    'Ferrying Bot', 'Tele Cone Low', 'Tele Cone Mid', 'Tele Cone High', 'Tele Cube Low', 'Tele Cube Mid', 'Tele Cube High', 
+                    '# Links', 'Co-op Bonus', 'Tele Cone Drop', 'Tele Cube Drop', 'Tele Charge Att.', 'Tele Charge Comp.',
+                    '# Robots Charge', 'Robot Disconnect', 'Disconnect Duration', 'RSL Status', 'Notes'],
             tableBody: [],
-            widthProp: Array(19).fill(width),
+            widthProp: Array(32).fill(width),
             Sheetloading: false,
             ResponseText: ""
         }
@@ -59,10 +61,12 @@ export default class QRCodeScanner extends Component {
         var n = JSON.parse(scan)
         this.storeData(
             [...this.state.tableBody,
-            [n.teamNumber, n.matchNumber, n.color, n.crossTarmac,
-            n.AutonuppHubAtt, n.AutonuppHubComp, n.AutonlowerHubAtt, n.AutonlowerHubComp,
-            n.TeleopuppHubAtt, n.TeleopuppHubComp, n.TeleoplowerHubAtt, n.TeleoplowerHubComp,
-            n.primaryScoringLocation, n.climbAttempted, n.climbLevel, n.stopForMoreThan10Secs, n.secsStopped, n.RSLStatus, n.Notes]]).then(() => {
+            [n.teamNumber, n.matchNumber, n.color, n.crossCommunity,
+            n.chargeAttemptedAuton, n.chargeRecievedAuton, n.AutonConeLow, n.AutonConeMid,
+            n.AutonConeHigh, n.AutonCubeLow, n.AutonCubeMid, n.AutonCubeHigh,
+            n.retrieveCargo, n.defenseBot, n.ferryingPickup, n.TeleopConeLow, n.TeleopConeMid, n.TeleopConeHigh, n.TeleopCubeLow, n.TeleopCubeMid, n.TeleopCubeHigh,
+            n.linkNumber, n.coopertitonBonus, n.TeleopConeDropped, n.TeleopCubeDropped, n.chargeAttemptedEndgame, 
+            n.chargeRecievedAEndgame, n.numberRobotsChargingEndgame, n.robotDisconnect, n.secsStopped, n.RSLStatus, n.Notes]]).then(() => {
                 this.updateItems()
             })
 
@@ -95,10 +99,17 @@ export default class QRCodeScanner extends Component {
             body: JSON.stringify(this.state.tableBody),
         };
         this.setState({ Sheetloading: true })
-        await fetch("https://fathomless-basin-63309.herokuapp.com/sheets", options)
+        await fetch("https://scoutingappserver.onrender.com/sheets", options)
             .then((response) => {
-                this.setState({ ResponseText: "Successfully Sent", Sheetloading: false })
-                this.storeData([]).then(() => { this.updateItems() })
+                var inter = ""
+                if (response.status == 200){
+                    inter = "Successfully Sent"
+                    this.storeData([]).then(() => { this.updateItems() })
+                }
+                else
+                    inter = "An error Occured"
+                this.setState({ ResponseText: inter, Sheetloading: false })
+
             }).catch((err) => {
                 this.setState({ ResponseText: "An Error Occurred: " + err })
             })
