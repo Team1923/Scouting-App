@@ -7,7 +7,7 @@
       "**/*"
     ],
     "android": {
-      "package": "com.turtlez200.RoboticsScoutingApp1923"
+      "package": "com.turtlez200.RoboticsScoutingApp"
     },
     "ios": {
       "bundleIdentifier": "com.turtlez200.RoboticsScoutingApp"
