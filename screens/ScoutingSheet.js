@@ -530,7 +530,7 @@ export default class ScoutingSheet extends Component {
                                 }
 
                                 <Text style={{fontSize: 21, marginTop: 3}}>RSL Status</Text>
-                                <View style={{flexDirection: 'row'}}>
+                                <View style={{flexDirection: 'column'}}>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
                                         value="Blinking Orange"
@@ -583,7 +583,7 @@ export default class ScoutingSheet extends Component {
                                 </View>
                                 {this.state.chargeAttemptedEndgame == 1 &&
                                     <View style={{ flexDirection: 'column', marginTop: 2 }}>
-                                        <View style={{ flexDirection: 'row' }}>
+                                        <View style={{ flexDirection: 'column' }}>
                                             <View style={styles.TeamClimb}>
                                                 <RadioButton.Android
                                                     value="Parked"
