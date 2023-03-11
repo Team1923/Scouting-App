@@ -18,7 +18,7 @@ export default class ScoutingSheet extends Component {
             crossCommunity: 0,
             chargeAttemptedAuton: 0,
             chargeRecievedAuton: '',
-            chargeAttemptedEndgame: 0,
+            chargeAttemptedEndgame: 0, 
             chargeRecievedAEndgame: '',
             numberRobotsChargingEndgame: '0',
             retrieveCargo: '',
@@ -695,7 +695,7 @@ export default class ScoutingSheet extends Component {
                                 </View>
                                 {this.state.GenerateQrCode &&
                                     <View style={{ alignSelf: 'center', marginTop: 15, alignItems: 'center' }}>
-                                        <this.QRCODE
+                                         <this.QRCODE
                                             value={this.state.currQRCode}
                                         />
                                         <TouchableOpacity onPress={() => { this.createTwoButtonAlert() }} style={styles.Reset}>
