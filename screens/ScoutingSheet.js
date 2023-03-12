@@ -533,33 +533,33 @@ export default class ScoutingSheet extends Component {
                                 <View style={{flexDirection: 'column'}}>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
-                                        value="Blinking Orange"
-                                        status={this.state.RSLStatus === 'Blinking Orange' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ RSLStatus: 'Blinking Orange' })}
+                                        value="Blinking"
+                                        status={this.state.RSLStatus === 'Blinking' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ RSLStatus: 'Blinking' })}
                                     />
                                     <Text style={{ fontSize: 20 }} >Blinking</Text>
                                 </View>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
-                                        value="Solid Orange"
-                                        status={this.state.RSLStatus === 'Solid Orange' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ RSLStatus: 'Solid Orange' })}
+                                        value="Off"
+                                        status={this.state.RSLStatus === 'Off' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ RSLStatus: 'Off' })}
                                     />
                                     <Text style={{ fontSize: 20 }} >Off</Text>
                                 </View>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
-                                        value="No Lit"
-                                        status={this.state.RSLStatus === 'No Lit' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ RSLStatus: 'No Lit' })}
+                                        value="Solid"
+                                        status={this.state.RSLStatus === 'Solid' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ RSLStatus: 'Solid' })}
                                     />
                                     <Text style={{ fontSize: 20 }} >Solid</Text>
                                 </View>
                                 <View style={styles.TeamClimb}>
                                     <RadioButton.Android
-                                        value="Not Visible"
-                                        status={this.state.RSLStatus === 'Not Visible' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ RSLStatus: 'Not Visible' })}
+                                        value="N/A"
+                                        status={this.state.RSLStatus === 'N/A' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ RSLStatus: 'N/A' })}
                                     />
                                     <Text style={{ fontSize: 20 }} >N/A</Text>
                                 </View>
@@ -702,7 +702,8 @@ export default class ScoutingSheet extends Component {
                                             <Text>New Match?</Text>
                                         </TouchableOpacity>
                                     </View>
-
+                                   
+                                
                                 }
                             </View>
                         </ScrollView>
