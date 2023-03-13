@@ -1,7 +1,7 @@
 {
   "cli": {
     "version": ">= 3.7.2",
-    "requireCommit": true 
+    "requireCommit": true
   },
   "build": {
     "development": {
@@ -12,20 +12,22 @@
       "ios": {
         "buildConfiguration": "Debug",
         "resourceClass": "m1-medium"
-      }
+      },
+      "channel": "development"
     },
     "preview": {
       "distribution": "internal",
       "android": {
         "buildType": "apk",
-         "gradleCommand": ":app:assembleDebug"
+        "gradleCommand": ":app:assembleDebug"
       },
       "releaseChannel": "pls-work"
     },
     "production": {
       "ios": {
         "resourceClass": "m1-medium"
-      }
+      },
+      "channel": "production"
     }
   },
   "submit": {
