@@ -143,7 +143,7 @@ export default class QRCodeScanner extends Component {
                         <ScrollView horizontal={true} style={{ marginTop: 10 }}>
                             <Table borderStyle={{ borderWidth: 2, borderColor: '#c8e1ff' }}>
                                 <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text} widthArr={this.state.widthProp} />
-                                <Rows data={this.state.tableBody} textStyle={styles.text} widthArr={this.state.widthProp} />
+                                <Rows data={this.state.tableBody} style={styles.text} widthArr={this.state.widthProp} />
                             </Table>
                         </ScrollView>
                         <Button title='Send To Sheets (Wifi Needed)' onPress={() => this.sendToSheets()} />
