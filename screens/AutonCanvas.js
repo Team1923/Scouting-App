@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { View, Text, Button, Image, ImageBackground, TouchableOpacity } from "react-native";
+import { View, Text, Button, Image, ImageBackground, TouchableOpacity, Dimensions, StatusBar } from "react-native";
 import {
   Gesture,
   GestureDetector,
@@ -12,6 +12,8 @@ import { Canvas, Path } from "@shopify/react-native-skia";
 import ViewShot from 'react-native-view-shot';
 
 
+const currentHeight = Dimensions.get('window').height
+const currentWidth = Dimensions.get('window').width
 export default class AutonDraw extends Component {
 
   constructor(props){
@@ -23,46 +25,48 @@ export default class AutonDraw extends Component {
     }
   }
 
-  captureScreen = () => {
-    this.viewShot.capture().then(uri => {
+   captureScreen = async () => {
+    await this.viewShot.capture().then(uri => {
       this.setState({link: uri})
     });
+    this.props.navigation.navigate("ScoutingSheet")
   }
 
   clearDrawing = () => {
+    global.Path = []
     this.setState({path: []})
   }
-
+   
   pan=Gesture.Pan()
       .onStart((g) => {
-
-        Temp = this.state.path
-        Temp.push("M " + g.x + " " + g.y)
-        this.setState({path: Temp})
+        global.Path.push(["M " + g.x + " " + g.y]);
+        this.setState({path: []})
 
       })
       .onUpdate((g) => {
-        Temp = this.state.path
-        Temp[Temp.length-1] += (" L " + g.x + " " + g.y)
-        this.setState({path: Temp})
+        global.Path[global.Path.length-1].push(" L " + g.x + " " + g.y)
+        this.setState({path: []})
       })
       .minDistance(1)
-  
+    containerStyle = function (options) {
+        return {
+            flex: 1,
+            marginTop: StatusBar.currentHeight,
+        }
+    }
   render(){
-    console.log(this.state.link)
     return (
-
-     <GestureHandlerRootView style={{flex:1}}>
+       <GestureHandlerRootView style={{flex:1, backgroundColor: 'gray'}}>
       <GestureDetector gesture={this.pan}>
 
-      <ViewShot style={{flex: 1, }} ref={ref => this.viewShot = ref}>
-        <ImageBackground style={{flex: 1}} source={require('../assets/FRCArena.png')}>
+      <ViewShot style={{flex: 1, alignItems: 'center'}} ref={ref => this.viewShot = ref} options={{result: 'data-uri'}}>
+        <ImageBackground style={{height: currentWidth, width: currentHeight }} source={require('../assets/FRCArena.png')}>
           <Canvas style={{flex: 1}}>
-            {this.state.path.map((p, index) => (
+            {global.Path.map((p, index) => (
                 
                   <Path
                     key={index}
-                    path={p}
+                    path={p.join(" ")}
                     strokeWidth={5}
                     style="stroke"
                     color={"black"}
@@ -80,6 +84,7 @@ export default class AutonDraw extends Component {
       
      </View>
     </GestureHandlerRootView>
+    
 
  );
   }

@@ -3,10 +3,12 @@ import React, { Component } from "react"
 import { RadioButton, Divider, Checkbox } from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 import { AntDesign } from '@expo/vector-icons';
-
 const width_proportion = Dimensions.get('window').width;
 const height_proportion = Dimensions.get('window').height;
 const font = Dimensions.get('window').fontScale
+
+global.Path = []
+
 export default class ScoutingSheet extends Component {
     constructor(props) {
         super(props);
@@ -50,8 +52,6 @@ export default class ScoutingSheet extends Component {
             TeleopConeMid: 0,
             TeleopConeLow: 0,
             TeleopConeDropped: 0,
-
-
             currQRCode: JSON.stringify({ })
 
         }
@@ -127,6 +127,7 @@ export default class ScoutingSheet extends Component {
 
 
         })
+        global.Path = []
     }
 
     containerStyle = function (options) {
@@ -200,8 +201,13 @@ export default class ScoutingSheet extends Component {
 
                                 {/* AUTON STARTS HERE*/}
 
-
+                                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Auton</Text>
+                                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 12, marginRight: 20}} onPress={() => {this.props.navigation.navigate("AutonCanvas")}}  >
+                                    <Text style={{ fontSize: 20,  }}>Draw Path</Text>
+                                    <AntDesign name='arrowright' size={height_proportion * 0.04}  style={{marginLeft: 3}}/>
+                                </TouchableOpacity>
+                                </View>
                                 <Divider style={{ marginTop: 5 }} />
                                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                     <Text style={styles.CheckboxText}>Cross Community Line</Text>
@@ -680,7 +686,6 @@ export default class ScoutingSheet extends Component {
                                                     TeleopConeMid: this.state.TeleopConeMid,
                                                     TeleopConeLow: this.state.TeleopConeLow,
                                                     TeleopConeDropped: this.state.TeleopConeDropped,
-
 
 
                                                 }),
