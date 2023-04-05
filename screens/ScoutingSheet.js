@@ -1,4 +1,4 @@
-import { Linking, StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, StatusBar, Dimensions, SafeAreaView, TextInput, Button, Alert } from 'react-native';
+import { Linking, StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, StatusBar, Dimensions, SafeAreaView, TextInput, Button, Alert, KeyboardAvoidingView } from 'react-native';
 import React, { Component } from "react"
 import { RadioButton, Divider, Checkbox } from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
@@ -13,7 +13,7 @@ export default class ScoutingSheet extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            name: '',
             teamNumber: '',
             matchNumber: '',
             color: '',
@@ -32,6 +32,7 @@ export default class ScoutingSheet extends Component {
             secsStopped: '0',
             RSLStatus: '',
             Notes: '',
+            colorNumber: '',
 
             GenerateQrCode: false,
 
@@ -84,10 +85,8 @@ export default class ScoutingSheet extends Component {
 
     RESET = function () {
         this.setState({
-
             teamNumber: '',
             matchNumber: '',
-            color: '',
             crossCommunity: 0,
             chargeAttemptedAuton: 0,
             chargeRecievedAuton: '',
@@ -141,7 +140,8 @@ export default class ScoutingSheet extends Component {
 
     render() {
         return (
-            <SafeAreaView style={this.containerStyle()}>
+            <KeyboardAvoidingView style={this.containerStyle()} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <SafeAreaView style={{flex: 1}}>
                 <View style={styles.TopBottomBanner}>
                     <View style={{ flex: 0.9, justifyContent: 'center', flexDirection: 'row' }}>
                         <Text style={styles.Title}>MidKnight Inventors Scouting App</Text>
@@ -155,7 +155,17 @@ export default class ScoutingSheet extends Component {
                         <ScrollView horizontal={true}>
                             <View style={{ flexDirection: 'column', width: width_proportion * 0.95, marginLeft: 20, marginTop: 10 }}>
 
-                                <Text style={{ fontSize: 22 }}>Team #</Text>
+                                <Text style={{ fontSize: 22 }}>Names</Text>
+                                <View style={styles.InputView}>
+                                    <TextInput
+                                        style={styles.InfoInput}
+                                        value={this.state.name}
+                                        onChangeText={(Name) => { this.setState({ name: Name }) }}
+                                    >
+                                    </TextInput>
+                                </View>
+
+                                <Text style={styles.ArgText}>Team #</Text>
                                 <View style={styles.InputView}>
                                     <TextInput
                                         style={styles.InfoInput}
@@ -197,11 +207,41 @@ export default class ScoutingSheet extends Component {
                                         <Text style={{ fontSize: 20, color: 'blue' }}>Blue</Text>
                                     </View>
                                 </View>
+                                {this.state.color != '' && 
+                                <View style={{flexDirection: 'row'}}>
+                                <View style={styles.TeamClimb}>
+                                    <RadioButton.Android
+                                        value="1"
+                                        status={this.state.colorNumber === '1' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ colorNumber: '1' })}
+                                    />
+                                    <Text style={{ fontSize: 20 }} >1</Text>
+                                </View>
+                                <View style={styles.TeamClimb}>
+                                    <RadioButton.Android
+                                        value="2"
+                                        status={this.state.colorNumber === '2' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ colorNumber: '2' })}
+                                    />
+                                    <Text style={{ fontSize: 20 }} >2</Text>
+                                </View>
+                                <View style={styles.TeamClimb}>
+                                    <RadioButton.Android
+                                        value="3"
+                                        status={this.state.colorNumber === '3' ? 'checked' : 'unchecked'}
+                                        onPress={() => this.setState({ colorNumber: '3' })}
+                                    />
+                                    <Text style={{ fontSize: 20 }} >3</Text>
+                                </View>
+                                
+
+                                </View>}
+                                
 
 
                                 {/* AUTON STARTS HERE*/}
 
-                                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: -10}}>
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Auton</Text>
                                 <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 12, marginRight: 20}} onPress={() => {this.props.navigation.navigate("AutonCanvas")}}  >
                                     <Text style={{ fontSize: 20,  }}>Draw Path</Text>
@@ -486,30 +526,9 @@ export default class ScoutingSheet extends Component {
                                 </View>
                                 </View>
 
-                                <View style={{ flexDirection: 'row', marginTop: 13 }}>
-                                        <Text style={{ fontSize: 20 }}>Number of Links</Text>
-                                        <View style={styles.SameLineInputView}>
-                                            <TextInput
-                                                style={styles.InfoInput}
-                                                keyboardType='numeric'
-                                                value={this.state.linkNumber}
-                                                onChangeText={(Number) => { this.setState({ linkNumber: Number }) }}
-                                            >
-                                            </TextInput>
-                                        </View>
-                                 </View>
+                              
 
-                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                    <Text style={styles.CheckboxText}>Coopertiton Bonus</Text>
-                                    <View style={{ marginLeft: 5 }}>
-                                        <Checkbox.Android
-                                            status={this.state.coopertitonBonus == 1 ? 'checked' : 'unchecked'}
-                                            onPress={() => this.state.coopertitonBonus == 1 ? this.setState({ coopertitonBonus: 0 }) : this.setState({ coopertitonBonus: 1 })}
-
-                                        />
-                                    </View>
-
-                                </View>
+                                
 
                                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 1 }}>
                                     <Text style={{ maxWidth: width_proportion * 0.7, fontSize: 20 }}>Did the Robot Disconnect</Text>
@@ -521,6 +540,7 @@ export default class ScoutingSheet extends Component {
                                     </View>
                                 </View>
                                 {this.state.robotDisconnect == 1 &&
+                                <View>
                                     <View style={{ flexDirection: 'row', marginTop: 4, marginLeft: 7 }}>
                                         <Text style={{ fontSize: 19 }}>How long(seconds):</Text>
                                         <View style={styles.SameLineInputView}>
@@ -533,8 +553,6 @@ export default class ScoutingSheet extends Component {
                                             </TextInput>
                                         </View>
                                     </View>
-                                }
-
                                 <Text style={{fontSize: 21, marginTop: 3}}>RSL Status</Text>
                                 <View style={{flexDirection: 'column'}}>
                                 <View style={styles.TeamClimb}>
@@ -571,6 +589,10 @@ export default class ScoutingSheet extends Component {
                                 </View>
 
                                 </View>
+                                </View>
+                                }
+
+                                
 
                                 {/* ENGAME STARTS HERE*/}
 
@@ -650,6 +672,8 @@ export default class ScoutingSheet extends Component {
 
                                                 currQRCode: JSON.stringify({
 
+                                                    name: this.state.name,
+                                                    colorNumber: this.state.colorNumber,                                                
                                                     teamNumber: this.state.teamNumber,
                                                     matchNumber: this.state.matchNumber,
                                                     color: this.state.color,
@@ -662,8 +686,7 @@ export default class ScoutingSheet extends Component {
                                                     retrieveCargo: this.state.retrieveCargo,
                                                     defenseBot: this.state.defenseBot,
                                                     ferryingPickup: this.state.ferryingPickup,
-                                                    linkNumber: this.state.linkNumber,
-                                                    coopertitonBonus: this.state.coopertitonBonus,
+                                                    
                                                     robotDisconnect: this.state.robotDisconnect,
                                                     secsStopped: this.state.secsStopped,
                                                     RSLStatus: this.state.RSLStatus,
@@ -686,7 +709,6 @@ export default class ScoutingSheet extends Component {
                                                     TeleopConeMid: this.state.TeleopConeMid,
                                                     TeleopConeLow: this.state.TeleopConeLow,
                                                     TeleopConeDropped: this.state.TeleopConeDropped,
-
 
                                                 }),
                                                 GenerateQrCode: true
@@ -715,7 +737,9 @@ export default class ScoutingSheet extends Component {
                     </ScrollView>
 
                 </View>
-            </SafeAreaView>
+                </SafeAreaView>
+
+                </KeyboardAvoidingView>
         )
     }
 }

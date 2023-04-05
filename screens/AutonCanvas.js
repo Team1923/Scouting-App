@@ -14,6 +14,7 @@ import ViewShot from 'react-native-view-shot';
 
 const currentHeight = Dimensions.get('window').height
 const currentWidth = Dimensions.get('window').width
+global.Link = "";
 export default class AutonDraw extends Component {
 
   constructor(props){
@@ -23,11 +24,11 @@ export default class AutonDraw extends Component {
       link: ''
       
     }
-  }
+  } 
 
    captureScreen = async () => {
     await this.viewShot.capture().then(uri => {
-      this.setState({link: uri})
+      global.Link = uri;
     });
     this.props.navigation.navigate("ScoutingSheet")
   }
@@ -59,8 +60,9 @@ export default class AutonDraw extends Component {
        <GestureHandlerRootView style={{flex:1, backgroundColor: 'gray'}}>
       <GestureDetector gesture={this.pan}>
 
-      <ViewShot style={{flex: 1, alignItems: 'center'}} ref={ref => this.viewShot = ref} options={{result: 'data-uri'}}>
-        <ImageBackground style={{height: currentWidth, width: currentHeight }} source={require('../assets/FRCArena.png')}>
+        <ImageBackground style={{ flex: 1,height: currentWidth, width: currentHeight }} source={require('../assets/FRCArena.png')}>
+        <ViewShot style={{flex: 1}} ref={ref => this.viewShot = ref} options={{result: 'data-uri', format: 'png', width: 100/3, height: 50/3}}>
+
           <Canvas style={{flex: 1}}>
             {global.Path.map((p, index) => (
                 
@@ -73,9 +75,10 @@ export default class AutonDraw extends Component {
                   />
                 ))}
           </Canvas>
+          </ViewShot>
+
         </ImageBackground>
          
-         </ViewShot>
         
      </GestureDetector>
      <View style={{position: 'absolute', padding: 20, marginLeft: 10, flexDirection: 'row'}}>
