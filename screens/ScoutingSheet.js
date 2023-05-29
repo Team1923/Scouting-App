@@ -39,10 +39,12 @@ export default class ScoutingSheet extends Component {
             AutonCubeHigh: 0,
             AutonCubeMid: 0,
             AutonCubeLow: 0,
+            AutonCubeDrop: 0,
             
             AutonConeHigh: 0,
             AutonConeMid: 0,
             AutonConeLow: 0,
+            AutonConeDrop: 0,
 
             TeleopCubeHigh: 0,
             TeleopCubeMid: 0,
@@ -108,10 +110,12 @@ export default class ScoutingSheet extends Component {
             AutonCubeHigh: 0,
             AutonCubeMid: 0,
             AutonCubeLow: 0,
+            AutonCubeDrop: 0,
             
             AutonConeHigh: 0,
             AutonConeMid: 0,
             AutonConeLow: 0,
+            AutonConeDrop: 0,
 
             TeleopCubeHigh: 0,
             TeleopCubeMid: 0,
@@ -358,6 +362,26 @@ export default class ScoutingSheet extends Component {
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeLow: Math.max(this.state.AutonConeLow - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
                                             <Text style={styles.ArgText}>{this.state.AutonConeLow}</Text>
                                             <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeLow: this.state.AutonConeLow + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+
+                                <View style={styles.CounterView}>
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cube Drop</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeDrop: Math.max(this.state.AutonCubeDrop - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonCubeDrop}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeDrop: this.state.AutonCubeDrop + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cone Drop</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeDrop: Math.max(this.state.AutonConeDrop - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonConeDrop}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeDrop: this.state.AutonConeDrop + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
                                         </View>
                                     </View>
                                 </View>
@@ -695,11 +719,13 @@ export default class ScoutingSheet extends Component {
                                                     AutonCubeHigh: this.state.AutonCubeHigh,
                                                     AutonCubeMid: this.state.AutonCubeMid,
                                                     AutonCubeLow: this.state.AutonCubeLow,
-                                                    
+                                                    AutonCubeDropped: this.state.AutonCubeDrop,
+
                                                     AutonConeHigh: this.state.AutonConeHigh,
                                                     AutonConeMid: this.state.AutonConeMid,
                                                     AutonConeLow: this.state.AutonConeLow,
-                                        
+                                                    AutonConeDropped: this.state.AutonConeDrop,
+
                                                     TeleopCubeHigh: this.state.TeleopCubeHigh,
                                                     TeleopCubeMid: this.state.TeleopCubeMid,
                                                     TeleopCubeLow: this.state.TeleopCubeLow,
