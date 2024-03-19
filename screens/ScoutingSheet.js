@@ -157,6 +157,8 @@ export default class ScoutingSheet extends Component {
                 <View style={styles.MainContent}>
                     <ScrollView>
                         <ScrollView horizontal={true}>
+                            
+                            {/* Names */}
                             <View style={{ flexDirection: 'column', width: width_proportion * 0.95, marginLeft: 20, marginTop: 10 }}>
 
                                 <Text style={{ fontSize: 22 }}>Names</Text>
@@ -169,6 +171,7 @@ export default class ScoutingSheet extends Component {
                                     </TextInput>
                                 </View>
 
+                                {/* Team number */}
                                 <Text style={styles.ArgText}>Team #</Text>
                                 <View style={styles.InputView}>
                                     <TextInput
@@ -179,6 +182,8 @@ export default class ScoutingSheet extends Component {
                                     >
                                     </TextInput>
                                 </View>
+
+                                {/* Match number */}
                                 <Text style={styles.ArgText}>Match #</Text>
                                 <View style={styles.InputView}>
                                     <TextInput
@@ -189,6 +194,8 @@ export default class ScoutingSheet extends Component {
                                     >
                                     </TextInput>
                                 </View>
+
+                                {/* Team color and number */}
                                 <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
                                     <Text style={{ fontSize: 22 }}>Team Color:</Text>
                                     <View style={styles.TeamColor}>
@@ -240,13 +247,12 @@ export default class ScoutingSheet extends Component {
                                 
 
                                 </View>}
-                                
 
 
                                 {/* AUTON STARTS HERE*/}
 
                                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: -10}}>
-                                <Text style={{ fontSize: 25, marginTop: 10 }}>Auton</Text>
+                                <Text style={{ fontSize: 25, marginTop: 10 }}>Autonomous</Text>
                                 <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 12, marginRight: 20}} onPress={() => {this.props.navigation.navigate("AutonCanvas")}}  >
                                     <Text style={{ fontSize: 20,  }}>Draw Path</Text>
                                     <AntDesign name='arrowright' size={height_proportion * 0.04}  style={{marginLeft: 3}}/>
@@ -263,15 +269,6 @@ export default class ScoutingSheet extends Component {
                                         />
                                     </View>
 
-                                </View>
-                                <View style={{ flexDirection: 'row', marginTop: 3, alignItems: 'center' }}>
-                                    <Text style={styles.CheckboxText}>Attempted Charging Station</Text>
-                                    <View style={{ marginLeft: 5 }}>
-                                        <Checkbox.Android
-                                            status={this.state.chargeAttemptedAuton == 1 ? 'checked' : 'unchecked'}
-                                            onPress={() => this.state.chargeAttemptedAuton == 1 ? this.setState({ chargeAttemptedAuton: 0, chargeRecievedAuton: '' }) : this.setState({ chargeAttemptedAuton: 1 })}
-                                        />
-                                    </View>
                                 </View>
                                 {this.state.chargeAttemptedAuton == 1 &&
                                     <View style={{ flexDirection: 'column', marginTop: 2 }}>
