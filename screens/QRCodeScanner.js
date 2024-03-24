@@ -62,8 +62,7 @@ export default class QRCodeScanner extends Component {
         this.storeData(
             [...this.state.tableBody,
             [n.teamNumber, n.matchNumber, n.color, n.crossCommunity,
-            n.chargeAttemptedAuton, n.chargeRecievedAuton, n.AutonConeLow, n.AutonConeMid,
-            n.AutonConeHigh, n.AutonCubeLow, n.AutonCubeMid, n.AutonCubeHigh, n.AutonConeDropped, n.AutonCubeDropped,
+            n.chargeAttemptedAuton, n.chargeRecievedAuton, n.AutonNotesAttemptedSpeaker, n.AutonNotesScoredSpeaker, n.AutonNotesAttemptedAmp, n.AutonNotesScoredAmp,
             n.retrieveCargo, n.defenseBot, n.ferryingPickup, n.TeleopConeLow, n.TeleopConeMid, n.TeleopConeHigh, n.TeleopCubeLow, n.TeleopCubeMid, n.TeleopCubeHigh,
             n.TeleopConeDropped, n.TeleopCubeDropped, n.chargeAttemptedEndgame, 
             n.chargeRecievedAEndgame, n.numberRobotsChargingEndgame, n.robotDisconnect, n.secsStopped, n.RSLStatus, n.Notes]], 'storage').then(() => {
