@@ -28,9 +28,17 @@
         "resourceClass": "m1-medium"
       },
       "channel": "production"
+    },
+    "development-simulator": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
     }
   },
   "submit": {
     "production": {}
   }
+
 }
