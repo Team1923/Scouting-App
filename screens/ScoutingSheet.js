@@ -41,6 +41,13 @@ export default class ScoutingSheet extends Component {
 
             AutonNotesAttemptedAmp: 0,
             AutonNotesScoredAmp: 0,
+            AutonCubeHigh: 0,
+            AutonCubeMid: 0,
+            AutonCubeLow: 0,
+            
+            AutonConeHigh: 0,
+            AutonConeMid: 0,
+            AutonConeLow: 0,
 
             TeleopCubeHigh: 0,
             TeleopCubeMid: 0,
@@ -107,6 +114,13 @@ export default class ScoutingSheet extends Component {
             AutonNotesAttemptedAmp: 0,
             AutonNotesScoredSpeaker: 0,
             AutonNotesScoredAmp: 0,
+            AutonCubeHigh: 0,
+            AutonCubeMid: 0,
+            AutonCubeLow: 0,
+            
+            AutonConeHigh: 0,
+            AutonConeMid: 0,
+            AutonConeLow: 0,
 
             TeleopCubeHigh: 0,
             TeleopCubeMid: 0,
@@ -322,6 +336,40 @@ export default class ScoutingSheet extends Component {
 
 
                                 {/* TELEOP STARTS HERE*/}                                
+
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center' }}>Cone Middle</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeMid: Math.max(this.state.AutonConeMid - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonConeMid}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeMid: this.state.AutonConeMid + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+
+                                <View style={styles.CounterView}>
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cube Lower</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeLow: Math.max(this.state.AutonCubeLow - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonCubeLow}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonCubeLow: this.state.AutonCubeLow + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{  fontSize: 19, alignSelf: 'center'  }}>Cone Lower</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeLow: Math.max(this.state.AutonConeLow - 1, 0) }) }}><Text style={styles.ArgText}>-</Text></TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.AutonConeLow}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ AutonConeLow: this.state.AutonConeLow + 1 }) }}><Text style={styles.ArgText}>+</Text></TouchableOpacity>
+                                        </View>
+                                    </View>
+                                </View>
+
+                                {/* TELEOP STARTS HERE*/}
+                                
+                                
 
                                 {/* Heading */}
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Teleop</Text>
@@ -653,6 +701,14 @@ export default class ScoutingSheet extends Component {
                                                     AutonNotesScoredSpeaker: this.state.AutonNotesScoredSpeaker,
                                                     AutonNotesScoredAmpped: this.state.AutonNotesScoredAmp,
 
+                                                    AutonCubeHigh: this.state.AutonCubeHigh,
+                                                    AutonCubeMid: this.state.AutonCubeMid,
+                                                    AutonCubeLow: this.state.AutonCubeLow,
+                                                    
+                                                    AutonConeHigh: this.state.AutonConeHigh,
+                                                    AutonConeMid: this.state.AutonConeMid,
+                                                    AutonConeLow: this.state.AutonConeLow,
+                                        
                                                     TeleopCubeHigh: this.state.TeleopCubeHigh,
                                                     TeleopCubeMid: this.state.TeleopCubeMid,
                                                     TeleopCubeLow: this.state.TeleopCubeLow,
@@ -685,12 +741,11 @@ export default class ScoutingSheet extends Component {
                                 
                                 }
                             </View>
-                            </View>
+                            </ScrollView>
                         </ScrollView>
-                    </ScrollView>
-                </View>
-            </SafeAreaView>
-        </KeyboardAvoidingView>
+                    </View>
+                </SafeAreaView>
+            </KeyboardAvoidingView>
         )
     }
 }

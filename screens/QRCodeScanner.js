@@ -17,13 +17,13 @@ export default class QRCodeScanner extends Component {
             tableHead:
                 ['Team #', 'Match #', 'Alliance', 'Cross Community Line',
                     'Auto Charge Att.', 'Auto Charge Comp.', 'Auto Cone Low', 'Auto Cone Mid',
-                    'Auto Cone High','Auto Cube Low', 'Auto Cube Mid', 'Auto Cube High', 'Auto Cone Drop', 'Auto Cube Drop', 'Pickup Location', 'Defense Bot',
+                    'Auto Cone High','Auto Cube Low', 'Auto Cube Mid', 'Auto Cube High', 'Pickup Location', 'Defense Bot',
                     'Ferrying Bot', 'Tele Cone Low', 'Tele Cone Mid', 'Tele Cone High', 'Tele Cube Low', 'Tele Cube Mid', 'Tele Cube High', 
                     'Tele Cone Drop', 'Tele Cube Drop', 'Tele Charge Att.', 'Tele Charge Comp.',
                     '# Robots Charge', 'Robot Disconnect', 'Disconnect Duration', 'RSL Status', 'Notes'],
             tableBody: [],
             scouterBody: [],
-            widthProp: Array(32).fill(width),
+            widthProp: Array(30).fill(width),
             Sheetloading: false,
             ResponseText: ""
         }
@@ -58,33 +58,33 @@ export default class QRCodeScanner extends Component {
         this.setState({
             scanned: true,
         })
+
         var n = JSON.parse(scan)
         this.storeData(
             [...this.state.tableBody,
             [n.teamNumber, n.matchNumber, n.color, n.crossCommunity,
             n.chargeAttemptedAuton, n.chargeRecievedAuton, n.AutonNotesAttemptedSpeaker, n.AutonNotesScoredSpeaker, n.AutonNotesAttemptedAmp, n.AutonNotesScoredAmp,
+            n.chargeAttemptedAuton, n.chargeRecievedAuton, n.AutonConeLow, n.AutonConeMid,
+            n.AutonConeHigh, n.AutonCubeLow, n.AutonCubeMid, n.AutonCubeHigh,
             n.retrieveCargo, n.defenseBot, n.ferryingPickup, n.TeleopConeLow, n.TeleopConeMid, n.TeleopConeHigh, n.TeleopCubeLow, n.TeleopCubeMid, n.TeleopCubeHigh,
             n.TeleopConeDropped, n.TeleopCubeDropped, n.chargeAttemptedEndgame, 
             n.chargeRecievedAEndgame, n.numberRobotsChargingEndgame, n.robotDisconnect, n.secsStopped, n.RSLStatus, n.Notes]], 'storage').then(() => {
                 this.updateItems(1)
-            }).catch(err => console.log(err))
-        console.log(n.color + " " + n.colorNumber)
-        if (n.color != '' && n.colorNumber != ''){
-            var temp = this.state.scouterBody
-            var index
-            if (n.color == 'R') index = parseInt(n.colorNumber)-1
-            else index = index = 2 + parseInt(n.colorNumber)
-            if (this.state.scouterBody[index][0] == n.name) this.state.scouterBody[index][1]++;
-            else {
-                this.state.scouterBody[index][0] = n.name
-                this.state.scouterBody[index][1] = 1
-            }
-
-            this.storeData(temp, 'scouterInfo').then(() => {
-                this.updateItems(2)
             })
+
+        var temp = this.state.scouterBody
+        var index
+        if (n.color == 'R') index = parseInt(n.colorNumber)-1
+        else index = index = 2 + parseInt(n.colorNumber)
+        if (this.state.scouterBody[index][0] == n.name) this.state.scouterBody[index][1]++;
+        else {
+            this.state.scouterBody[index][0] = n.name
+            this.state.scouterBody[index][1] = 1
         }
-        
+
+        this.storeData(temp, 'scouterInfo').then(() => {
+            this.updateItems(2)
+        })
 
 
     }
