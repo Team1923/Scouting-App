@@ -379,7 +379,7 @@ export default class ScoutingSheet extends Component {
                                         value="Between subwoofer and podium"
                                         status={this.state.shootingLocation.includes('Between subwoofer and podium') ? 'checked' : 'unchecked'}
                                         onPress={() => this.state.shootingLocation.includes('Between subwoofer and podium ') ? this.setState({ shootingLocation: this.state.shootingLocation.replace("Between subwoofer and podium ", "") }) 
-                                        : this.setState({ shootingLocation: this.state.shootingLocation += "Double " })}
+                                        : this.setState({ shootingLocation: this.state.shootingLocation += "Between subwoofer and podium " })}
                                     />
                                     <Text style={{ fontSize: 20 }} >Between subwoofer and podium</Text>
                                 </View>
