@@ -15,12 +15,11 @@ export default class QRCodeScanner extends Component {
             hasPermission: null,
             scanned: true,
             tableHead:
-                ['Team #', 'Match #', 'Alliance', 'Cross Community Line',
-                    'Auto Charge Att.', 'Auto Charge Comp.', 'Auto Cone Low', 'Auto Cone Mid',
-                    'Auto Cone High','Auto Cube Low', 'Auto Cube Mid', 'Auto Cube High', 'Auto Cone Drop', 'Auto Cube Drop', 'Pickup Location', 'Defense Bot',
-                    'Ferrying Bot', 'Tele Cone Low', 'Tele Cone Mid', 'Tele Cone High', 'Tele Cube Low', 'Tele Cube Mid', 'Tele Cube High', 
-                    'Tele Cone Drop', 'Tele Cube Drop', 'Tele Charge Att.', 'Tele Charge Comp.',
-                    '# Robots Charge', 'Robot Disconnect', 'Disconnect Duration', 'RSL Status', 'Notes'],
+                ['Team #', 'Match #', 'Alliance',
+                    'Auto Speaker Attempt', 'Auto Speaker Score', 
+                    'Defense', 'Ferrying', 'Amp Attempted', 'Amp Scored', 'Speaker Attempted', 'Speaker Scored',
+                    'Robot on stage?', 'Trap Attempted', 'Trap Scored',
+                    'Robot Disconnect', 'Disconnect Duration', 'RSL Status', 'Notes'],
             tableBody: [],
             scouterBody: [],
             widthProp: Array(32).fill(width),
@@ -61,11 +60,10 @@ export default class QRCodeScanner extends Component {
         var n = JSON.parse(scan)
         this.storeData(
             [...this.state.tableBody,
-            [n.teamNumber, n.matchNumber, n.color, n.crossCommunity,
-            n.chargeAttemptedAuton, n.chargeRecievedAuton, n.AutonConeLow, n.AutonConeMid,
-            n.AutonConeHigh, n.AutonCubeLow, n.AutonCubeMid, n.AutonCubeHigh, n.AutonConeDropped, n.AutonCubeDropped,
-            n.retrieveCargo, n.defenseBot, n.ferryingPickup, n.TeleopConeLow, n.TeleopConeMid, n.TeleopConeHigh, n.TeleopCubeLow, n.TeleopCubeMid, n.TeleopCubeHigh,
-            n.TeleopConeDropped, n.TeleopCubeDropped, n.chargeAttemptedEndgame, 
+            [n.teamNumber, n.matchNumber, n.color,
+            n.AutonSpeakerAttempt, n.AutonSpeakerComplete, n.defenseBot, n.ferryingPickup,
+            n.TeleopAmpAttempt, n.TeleopAmpComplete, n.TeleopSpeakerAttempt, n.TeleopSpeakerComplete,
+            n.onStageStatus, 
             n.chargeRecievedAEndgame, n.numberRobotsChargingEndgame, n.robotDisconnect, n.secsStopped, n.RSLStatus, n.Notes]], 'storage').then(() => {
                 this.updateItems(1)
             }).catch(err => console.log(err))
