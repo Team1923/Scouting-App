@@ -63,8 +63,8 @@ export default class QRCodeScanner extends Component {
             [n.teamNumber, n.matchNumber, n.color,
             n.AutonSpeakerAttempt, n.AutonSpeakerComplete, n.defenseBot, n.ferryingPickup,
             n.TeleopAmpAttempt, n.TeleopAmpComplete, n.TeleopSpeakerAttempt, n.TeleopSpeakerComplete,
-            n.onStageStatus, 
-            n.chargeRecievedAEndgame, n.numberRobotsChargingEndgame, n.robotDisconnect, n.secsStopped, n.RSLStatus, n.Notes]], 'storage').then(() => {
+            n.onStageStatus, n.TrapAttempt, n.TrapComplete,
+            n.robotDisconnect, n.secsStopped, n.RSLStatus, n.Notes]], 'storage').then(() => {
                 this.updateItems(1)
             }).catch(err => console.log(err))
         console.log(n.color + " " + n.colorNumber)

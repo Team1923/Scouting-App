@@ -95,6 +95,7 @@ export default class ScoutingSheet extends Component {
             colorNumber: '',
             onStageStatus: '',
             ferrying: '',
+            notesFerried: 0,
 
             GenerateQrCode: false,
 
@@ -130,119 +131,115 @@ export default class ScoutingSheet extends Component {
     render() {
         return (
             <KeyboardAvoidingView style={this.containerStyle()} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <SafeAreaView style={{flex: 1}}>
-                <View style={styles.TopBottomBanner}>
-                    <View style={{ flex: 0.9, justifyContent: 'center', flexDirection: 'row' }}>
-                        <Text style={styles.Title}>MidKnight Inventors Scouting App</Text>
+                <SafeAreaView style={{flex: 1}}>
+                    <View style={styles.TopBottomBanner}>
+                        <View style={{ flex: 0.9, justifyContent: 'center', flexDirection: 'row' }}>
+                            <Text style={styles.Title}>MidKnight Inventors Scouting App</Text>
+                        </View>
+                        <View style={{ flex: 0.1, justifyContent: 'flex-end', flexDirection: 'row' }}>
+                            <TouchableOpacity style={{ marginRight: 10 }} onPress={() => this.props.navigation.navigate("QrCodeScanner")}><AntDesign name='qrcode' size={height_proportion * 0.04} /></TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={{ flex: 0.1, justifyContent: 'flex-end', flexDirection: 'row' }}>
-                        <TouchableOpacity style={{ marginRight: 10 }} onPress={() => this.props.navigation.navigate("QrCodeScanner")}><AntDesign name='qrcode' size={height_proportion * 0.04} /></TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.MainContent}>
-                    <ScrollView>
-                        <ScrollView horizontal={true}>
-                            <View style={{ flexDirection: 'column', width: width_proportion * 0.95, marginLeft: 20, marginTop: 10 }}>
-                                <Text style={{ fontSize: 22 }}>Names</Text>
-                                <View style={styles.InputView}>
-                                    <TextInput
-                                        style={styles.InfoInput}
-                                        value={this.state.name}
-                                        onChangeText={(Name) => { this.setState({ name: Name }) }}
-                                    >
-                                    </TextInput>
-                                </View>
-
-                                <Text style={styles.ArgText}>Team #</Text>
-                                <View style={styles.InputView}>
-                                    <TextInput
-                                        style={styles.InfoInput}
-                                        keyboardType='numeric'
-                                        value={this.state.teamNumber}
-                                        onChangeText={(Number) => { this.setState({ teamNumber: Number }) }}
-                                    >
-                                    </TextInput>
-                                </View>
-                                <Text style={styles.ArgText}>Match #</Text>
-                                <View style={styles.InputView}>
-                                    <TextInput
-                                        style={styles.InfoInput}
-                                        keyboardType='numeric'
-                                        value={this.state.matchNumber}
-                                        onChangeText={(Number) => { this.setState({ matchNumber: Number }) }}
-                                    >
-                                    </TextInput>
-                                </View>
-                                {/* Driver Station */}
-                                <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
-                                    <Text style={{ fontSize: 22 }}>Team Color:</Text>
-                                    <View style={styles.TeamColor}>
-                                        <RadioButton.Android
-                                            value="R"
-                                            status={this.state.color === 'R' ? 'checked' : 'unchecked'}
-                                            onPress={() => this.setState({ color: 'R' })}
-                                            color='red'
-                                        />
-                                        <Text style={{ fontSize: 20, color: 'red' }} >Red</Text>
+                    <View style={styles.MainContent}>
+                        <ScrollView>
+                            <ScrollView horizontal={true}>
+                                <View style={{ flexDirection: 'column', width: width_proportion * 0.95, marginLeft: 20, marginTop: 10 }}>
+                                    <Text style={{ fontSize: 22 }}>Names</Text>
+                                    <View style={styles.InputView}>
+                                        <TextInput
+                                            style={styles.InfoInput}
+                                            value={this.state.name}
+                                            onChangeText={(Name) => { this.setState({ name: Name }) }}
+                                        >
+                                        </TextInput>
                                     </View>
 
-                                    <View style={styles.TeamColor}>
-                                        <RadioButton.Android
-                                            value="B"
-                                            status={this.state.color === 'B' ? 'checked' : 'unchecked'}
-                                            onPress={() => this.setState({ color: 'B' })}
-                                            color='blue'
-                                        />
-                                        <Text style={{ fontSize: 20, color: 'blue' }}>Blue</Text>
+                                    <Text style={styles.ArgText}>Team #</Text>
+                                    <View style={styles.InputView}>
+                                        <TextInput
+                                            style={styles.InfoInput}
+                                            keyboardType='numeric'
+                                            value={this.state.teamNumber}
+                                            onChangeText={(Number) => { this.setState({ teamNumber: Number }) }}
+                                        >
+                                        </TextInput>
                                     </View>
-                                </View>
-                                {this.state.color != '' && 
-                                <View style={{flexDirection: 'row'}}>
-                                <View style={styles.TeamClimb}>
-                                    <RadioButton.Android
-                                        value="1"
-                                        status={this.state.colorNumber === '1' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ colorNumber: '1' })}
-                                    />
-                                    <Text style={{ fontSize: 20 }} >1</Text>
-                                </View>
-                                <View style={styles.TeamClimb}>
-                                    <RadioButton.Android
-                                        value="2"
-                                        status={this.state.colorNumber === '2' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ colorNumber: '2' })}
-                                    />
-                                    <Text style={{ fontSize: 20 }} >2</Text>
-                                </View>
-                                <View style={styles.TeamClimb}>
-                                    <RadioButton.Android
-                                        value="3"
-                                        status={this.state.colorNumber === '3' ? 'checked' : 'unchecked'}
-                                        onPress={() => this.setState({ colorNumber: '3' })}
-                                    />
-                                    <Text style={{ fontSize: 20 }} >3</Text>
-                                </View>
-                                
+                                    <Text style={styles.ArgText}>Match #</Text>
+                                    <View style={styles.InputView}>
+                                        <TextInput
+                                            style={styles.InfoInput}
+                                            keyboardType='numeric'
+                                            value={this.state.matchNumber}
+                                            onChangeText={(Number) => { this.setState({ matchNumber: Number }) }}
+                                        >
+                                        </TextInput>
+                                    </View>
+                                    {/* Driver Station */}
+                                    <View style={{ flexDirection: 'row', marginTop: 7, alignItems: 'center' }}>
+                                        <Text style={{ fontSize: 22 }}>Team Color:</Text>
+                                        <View style={styles.TeamColor}>
+                                            <RadioButton.Android
+                                                value="R"
+                                                status={this.state.color === 'R' ? 'checked' : 'unchecked'}
+                                                onPress={() => this.setState({ color: 'R' })}
+                                                color='red'
+                                            />
+                                            <Text style={{ fontSize: 20, color: 'red' }} >Red</Text>
+                                        </View>
 
-                                </View>}
+                                        <View style={styles.TeamColor}>
+                                            <RadioButton.Android
+                                                value="B"
+                                                status={this.state.color === 'B' ? 'checked' : 'unchecked'}
+                                                onPress={() => this.setState({ color: 'B' })}
+                                                color='blue'
+                                            />
+                                            <Text style={{ fontSize: 20, color: 'blue' }}>Blue</Text>
+                                        </View>
+                                    </View>
+                                    {this.state.color != '' && 
+                                        <View style={{flexDirection: 'row'}}>
+                                            <View style={styles.TeamClimb}>
+                                                <RadioButton.Android
+                                                    value="1"
+                                                    status={this.state.colorNumber === '1' ? 'checked' : 'unchecked'}
+                                                    onPress={() => this.setState({ colorNumber: '1' })}
+                                                />
+                                                <Text style={{ fontSize: 20 }} >1</Text>
+                                            </View>
+                                            <View style={styles.TeamClimb}>
+                                                <RadioButton.Android
+                                                    value="2"
+                                                    status={this.state.colorNumber === '2' ? 'checked' : 'unchecked'}
+                                                    onPress={() => this.setState({ colorNumber: '2' })}
+                                                />
+                                                <Text style={{ fontSize: 20 }} >2</Text>
+                                            </View>
+                                            <View style={styles.TeamClimb}>
+                                                <RadioButton.Android
+                                                    value="3"
+                                                    status={this.state.colorNumber === '3' ? 'checked' : 'unchecked'}
+                                                    onPress={() => this.setState({ colorNumber: '3' })}
+                                                />
+                                                <Text style={{ fontSize: 20 }} >3</Text>
+                                            </View>
+                                        </View>
+                                    }
                                 
-
 
                                 {/* AUTON STARTS HERE*/}
 
                                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: -10}}>
-                                <Text style={{ fontSize: 25, marginTop: 10 }}>Auton</Text>
-                                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 12, marginRight: 20}} onPress={() => {this.props.navigation.navigate("AutonCanvas")}}  >
-                                    <Text style={{ fontSize: 20,  }}>Draw Path</Text>
-                                    <AntDesign name='arrowright' size={height_proportion * 0.04}  style={{marginLeft: 3}}/>
-                                </TouchableOpacity>
+                                   <Text style={{ fontSize: 25, marginTop: 10 }}>Auton</Text>
+                                    <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 12, marginRight: 20}} onPress={() => {this.props.navigation.navigate("AutonCanvas")}}  >
+                                        <Text style={{ fontSize: 20,  }}>Draw Path</Text>
+                                        <AntDesign name='arrowright' size={height_proportion * 0.04}  style={{marginLeft: 3}}/>
+                                    </TouchableOpacity>
                                 </View>
-                                <Divider style={{ marginTop: 5 }} />
-                                
-                                
+
+                                <Divider style={{ marginTop: 5 }} />            
                                 
                                 <View style={styles.CounterView}>
-
                                     <View style={styles.InnerCounterView}>
                                         <Text style={{ fontSize: 19, alignSelf: 'center' }}>Amp Attempt</Text>
                                         <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
@@ -290,10 +287,8 @@ export default class ScoutingSheet extends Component {
                                     </View>
                                 </View>
 
-                                
 
                                 {/* TELEOP STARTS HERE*/}
-                                
 
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Teleop</Text>
 
@@ -322,31 +317,31 @@ export default class ScoutingSheet extends Component {
 
                                 <View style={styles.CounterView}>
 
-                                <View style={styles.InnerCounterView}>
-                                    <Text style={{ fontSize: 19, alignSelf: 'center' }}>Amp Attempt</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopAmpAttempt: Math.max(0, this.state.TeleopAmpAttempt - 1) }) }}>
-                                            <Text style={styles.ArgText}>-</Text>
-                                        </TouchableOpacity>
-                                        <Text style={styles.ArgText}>{this.state.TeleopAmpAttempt}</Text>
-                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopAmpAttempt: this.state.TeleopAmpAttempt + 1 }) }}>
-                                            <Text style={styles.ArgText}>+</Text>
-                                        </TouchableOpacity>
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{ fontSize: 19, alignSelf: 'center' }}>Amp Attempt</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopAmpAttempt: Math.max(0, this.state.TeleopAmpAttempt - 1) }) }}>
+                                                <Text style={styles.ArgText}>-</Text>
+                                            </TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.TeleopAmpAttempt}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopAmpAttempt: this.state.TeleopAmpAttempt + 1 }) }}>
+                                                <Text style={styles.ArgText}>+</Text>
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
-                                </View>
 
-                                <View style={styles.InnerCounterView}>
-                                    <Text style={{ fontSize: 19, alignSelf: 'center'  }}>Amp Complete</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopAmpComplete: Math.max(0, this.state.TeleopAmpComplete - 1) }) }}>
-                                            <Text style={styles.ArgText}>-</Text>
-                                        </TouchableOpacity>
-                                        <Text style={styles.ArgText}>{this.state.TeleopAmpComplete}</Text>
-                                        <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopAmpComplete: this.state.TeleopAmpComplete + 1 }) }}>
-                                            <Text style={styles.ArgText}>+</Text>
-                                        </TouchableOpacity>
+                                    <View style={styles.InnerCounterView}>
+                                        <Text style={{ fontSize: 19, alignSelf: 'center'  }}>Amp Complete</Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopAmpComplete: Math.max(0, this.state.TeleopAmpComplete - 1) }) }}>
+                                                <Text style={styles.ArgText}>-</Text>
+                                            </TouchableOpacity>
+                                            <Text style={styles.ArgText}>{this.state.TeleopAmpComplete}</Text>
+                                            <TouchableOpacity hitSlop={{ top: 18, bottom: 20, right: 20, left: 20 }} onPress={() => { this.setState({ TeleopAmpComplete: this.state.TeleopAmpComplete + 1 }) }}>
+                                                <Text style={styles.ArgText}>+</Text>
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
-                                </View>
                                 </View>
 
                                 <View style={styles.CounterView}>
@@ -503,10 +498,8 @@ export default class ScoutingSheet extends Component {
                                     </View>
                                 }
 
-                                
 
                                 {/* ENGAME STARTS HERE*/}
-
 
                                 <Text style={{ fontSize: 25, marginTop: 10 }}>Endgame</Text>
                                 <Divider style={{ marginTop: 5 }} />
