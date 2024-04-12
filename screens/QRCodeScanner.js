@@ -15,11 +15,13 @@ export default class QRCodeScanner extends Component {
             hasPermission: null,
             scanned: true,
             tableHead:
-                ['Team #', 'Match #', 'Alliance',
+                [
+                    'Team #', 'Match #', 'Alliance',
                     'Auto Speaker Attempt', 'Auto Speaker Score', 
-                    'Defense', 'Ferrying', 'Amp Attempted', 'Amp Scored', 'Speaker Attempted', 'Speaker Scored',
+                    'Defense', 'Ferrying', 'Notes Ferried', 'Amp Attempted', 'Amp Scored', 'Speaker Attempted', 'Speaker Scored',
                     'Robot on stage?', 'Trap Attempted', 'Trap Scored',
-                    'Robot Disconnect', 'Disconnect Duration', 'RSL Status', 'Notes'],
+                    'Robot Disconnect', 'Disconnect Duration', 'RSL Status', 'Notes'
+                ],
             tableBody: [],
             scouterBody: [],
             widthProp: null,
@@ -60,14 +62,20 @@ export default class QRCodeScanner extends Component {
         })
         var n = JSON.parse(scan)
         this.storeData(
-            [...this.state.tableBody,
-            [n.teamNumber, n.matchNumber, n.color,
-            n.AutonSpeakerAttempt, n.AutonSpeakerComplete, n.defenseBot, n.ferryingPickup,
-            n.TeleopAmpAttempt, n.TeleopAmpComplete, n.TeleopSpeakerAttempt, n.TeleopSpeakerComplete,
-            n.onStageStatus, n.TrapAttempt, n.TrapComplete,
-            n.robotDisconnect, n.secsStopped, n.RSLStatus, n.Notes]], 'storage').then(() => {
-                this.updateItems(1)
-            }).catch(err => console.log(err))
+            [
+                ...this.state.tableBody,
+                [
+                    n.teamNumber, n.matchNumber, n.color,
+                    n.AutonSpeakerAttempt, n.AutonSpeakerComplete, 
+                    n.defenseBot, n.ferryingPickup, n.notesFerried,
+                    n.TeleopAmpAttempt, n.TeleopAmpComplete, n.TeleopSpeakerAttempt, n.TeleopSpeakerComplete,
+                    n.onStageStatus, n.TrapAttempt, n.TrapComplete,
+                    n.robotDisconnect, n.secsStopped, n.RSLStatus, n.Notes
+                ]
+            ], 'storage'
+        ).then(() => {
+            this.updateItems(1)
+        }).catch(err => console.log(err))
         console.log(n.color + " " + n.colorNumber)
         if (n.color != '' && n.colorNumber != ''){
             var temp = this.state.scouterBody
@@ -84,9 +92,6 @@ export default class QRCodeScanner extends Component {
                 this.updateItems(2)
             })
         }
-        
-
-
     }
 
     containerStyle = function (options) {

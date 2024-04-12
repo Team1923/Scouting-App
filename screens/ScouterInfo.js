@@ -12,56 +12,53 @@ const currentWidth = Dimensions.get('window').width
 
 export default class ScouterInfo extends Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      path: [],
-      link: '',
-      tableHead: ['Robot', 'Names', '# Scouted'],
-
-      tableTitle: ['R1', 'R2', 'R3', 'B1', 'B2', 'B3'],
-      tableData: [
-        []
-      ]
+    constructor(props){
+        super(props)
+        this.state = {
+            path: [],
+            link: '',
+            tableHead: ['Robot', 'Names', '# Scouted'],
+            tableTitle: ['R1', 'R2', 'R3', 'B1', 'B2', 'B3'],
+            tableData: [
+                []
+            ]
+        }
     }
-  } 
 
-  containerStyle = function (options) {
-    return {
-        flex: 1,
-        backgroundColor: '#fff',
-        flexDirection: 'column',
-        marginTop: StatusBar.currentHeight,
-    }
-}   
+    containerStyle = function (options) {
+        return {
+            flex: 1,
+            backgroundColor: '#fff',
+            flexDirection: 'column',
+            marginTop: StatusBar.currentHeight,
+        }
+    }   
+    
     async componentDidMount() {
         this.setState({tableData: this.props.route.params.table})
     }
 
-    
-
-  render(){
-    return (
-    <SafeAreaView style={this.containerStyle()}>
-        <View style={styles.TopBottomBanner}>
-            <TouchableOpacity onPress={() => this.props.navigation.replace("QrCodeScanner")}><Text style={styles.Title}>MidKnight Inventors Scouting App</Text></TouchableOpacity>
-        </View>
-        <View style={{ flex: 0.95, justifyContent: 'flex-start' }}>
-            <ScrollView style={{}}>
-            <Table borderStyle={{borderWidth: 1}}>
-                <Row data={this.state.tableHead} flexArr={[1, 2, 1]} style={styles.head} textStyle={styles.text}/>
-                <TableWrapper style={styles.wrapper}>
-                    <Col data={this.state.tableTitle} flexArr={[1]} heightArr={Array(6).fill(32)} textStyle={styles.text}/>
-                    <Rows data={this.state.tableData} flexArr={[2, 1]} heightArr={Array(6).fill(32)} textStyle={styles.text}/>
-                </TableWrapper>
-            </Table>
-            <Button title="Clear Table" onPress={() => {this.props.route.params.clear([['', 0], ['', 0], ['', 0], ['', 0], ['', 0], ['', 0]], 'scouterInfo').then(() => {this.setState({tableData: [['', 0], ['', 0], ['', 0], ['', 0], ['', 0], ['', 0]]})})}}/>
-            </ScrollView>
-        </View>
-    </SafeAreaView>
-    );
-  }
-  
+    render(){
+        return (
+            <SafeAreaView style={this.containerStyle()}>
+                <View style={styles.TopBottomBanner}>
+                    <TouchableOpacity onPress={() => this.props.navigation.replace("QrCodeScanner")}><Text style={styles.Title}>MidKnight Inventors Scouting App</Text></TouchableOpacity>
+                </View>
+                <View style={{ flex: 0.95, justifyContent: 'flex-start' }}>
+                    <ScrollView style={{}}>
+                        <Table borderStyle={{borderWidth: 1}}>
+                            <Row data={this.state.tableHead} flexArr={[1, 2, 1]} style={styles.head} textStyle={styles.text}/>
+                            <TableWrapper style={styles.wrapper}>
+                                <Col data={this.state.tableTitle} flexArr={[1]} heightArr={Array(6).fill(32)} textStyle={styles.text}/>
+                                <Rows data={this.state.tableData} flexArr={[2, 1]} heightArr={Array(6).fill(32)} textStyle={styles.text}/>
+                            </TableWrapper>
+                        </Table>
+                        <Button title="Clear Table" onPress={() => {this.props.route.params.clear([['', 0], ['', 0], ['', 0], ['', 0], ['', 0], ['', 0]], 'scouterInfo').then(() => {this.setState({tableData: [['', 0], ['', 0], ['', 0], ['', 0], ['', 0], ['', 0]]})})}}/>
+                    </ScrollView>
+                </View>
+            </SafeAreaView>
+        );
+    }
 }
 
 

@@ -27,7 +27,6 @@ export default class ScoutingSheet extends Component {
             Notes: '',
             colorNumber: '',
             onStageStatus: '',
-            ferrying: '',
 
             GenerateQrCode: false,
 
@@ -94,9 +93,7 @@ export default class ScoutingSheet extends Component {
             Notes: '',
             colorNumber: '',
             onStageStatus: '',
-            ferrying: '',
-            notesFerried: 0,
-
+            
             GenerateQrCode: false,
 
             AutonAmpAttempt: 0,
@@ -613,7 +610,6 @@ export default class ScoutingSheet extends Component {
                                                     Notes: this.state.Notes,
                                                     colorNumber: this.state.colorNumber,
                                                     onStageStatus: this.state.onStageStatus,
-                                                    ferrying: this.state.ferrying,
 
                                                     AutonAmpAttempt: this.state.AutonAmpAttempt,
                                                     AutonSpeakerAttempt: this.state.AutonSpeakerAttempt,
