@@ -24,7 +24,7 @@ export default class QRCodeScanner extends Component {
                 ],
             tableBody: [],
             scouterBody: [],
-            widthProp: null,
+            widthProp: Array(32).fill(width),
             Sheetloading: false,
             ResponseText: ""
         }
@@ -53,7 +53,6 @@ export default class QRCodeScanner extends Component {
         this.AskForPermission()
         this.updateItems(1)
         this.updateItems(2)
-        this.setState({widthProp: Array(this.state.tableHead.length).fill(width)})
     }
 
     SaveData = (scan) => {
@@ -126,7 +125,7 @@ export default class QRCodeScanner extends Component {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: {data: JSON.stringify(this.state.tableBody), sheet: "1L-xgC_rhqn1Cu1eS2JoRoxaTc-6-8IObcyumDpIJCfE"},
+            body: JSON.stringify(this.state.tableBody),
         };
         this.setState({ Sheetloading: true })
         await fetch("https://scoutingappserver.onrender.com/sheets", options)
