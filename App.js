@@ -19,12 +19,12 @@ export default class App extends Component {
         <Stack.Navigator screenOptions={{
           headerShown: false,
         }}>
+
+          <Stack.Screen name="QrCodeScanner" component={QRCodeScanner} />
+
           <Stack.Screen name="ScoutingSheet" component={ScoutingSheet} />
 
           <Stack.Screen name="AutonCanvas" component={Draw} options={{orientation: 'landscape'}}/>
-
-
-          <Stack.Screen name="QrCodeScanner" component={QRCodeScanner} />
 
           <Stack.Screen name="ScouterInfo" component={ScouterInfo} />
 
