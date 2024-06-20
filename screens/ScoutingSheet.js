@@ -226,13 +226,6 @@ export default class ScoutingSheet extends Component {
 
                                 {/* AUTON STARTS HERE*/}
 
-                                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: -10}}>
-                                   <Text style={{ fontSize: 25, marginTop: 10 }}>Auton</Text>
-                                    <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 12, marginRight: 20}} onPress={() => {this.props.navigation.navigate("AutonCanvas")}}  >
-                                        <Text style={{ fontSize: 20,  }}>Draw Path</Text>
-                                        <AntDesign name='arrowright' size={height_proportion * 0.04}  style={{marginLeft: 3}}/>
-                                    </TouchableOpacity>
-                                </View>
 
                                 <Divider style={{ marginTop: 5 }} />            
                                 

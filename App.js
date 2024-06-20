@@ -24,8 +24,6 @@ export default class App extends Component {
 
           <Stack.Screen name="ScoutingSheet" component={ScoutingSheet} />
 
-          <Stack.Screen name="AutonCanvas" component={Draw} options={{orientation: 'landscape'}}/>
-
           <Stack.Screen name="ScouterInfo" component={ScouterInfo} />
 
         </Stack.Navigator>
